@@ -1,5 +1,5 @@
 # Bitburner
-# scripts used to automate hacking on all hosts
+**scripts used to automate hacking on all hosts
 
 These are some scripts I use to autoexec hacks to autogen cash in this game.
 There are scripts from others that I have modified in order to "better" run in my playthrough.
