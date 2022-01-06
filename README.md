@@ -6,5 +6,5 @@ There are scripts from others that I have modified in order to "better" run in m
 Your mileage may vary.
 
 Stocks & Hacknets seem to not be as profitable as I hoped.
-repo is 1.3.0 compatible
-current is $200m+/sec
+
+repo is 1.3.0 compatible - current is $200m+/sec
