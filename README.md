@@ -7,4 +7,4 @@ Your mileage may vary.
 
 Stocks & Hacknets seem to not be as profitable as I hoped.
 
-repo is 1.3.0 compatible - current max is ~$250m+/sec
+repo is 1.3.0 compatible
