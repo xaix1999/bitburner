@@ -5,8 +5,7 @@ export async function main(ns) {
  var files = ["weak.script", "grow.script", "hack.script"];//No touching, unless you understand everything here
  await ns.write(files[0], "weaken(args)", "w"); await ns.write(files[1], "grow(args)", "w"); await ns.write(files[2], "hack(args)", "w");
 //
- var serverList; var targetList; var hostList; var exes; var temp; var manager = false;
- var cycle = [0, "─", "\\", "|", "/"]; var latest = [["-", "-"], ["-", "-"], ["-", "-"]];
+ var serverList; var targetList; var hostList; var exes; var temp = false;
  if (false) { brutessh(); ftpcrack(); relaysmtp(); httpworm(); sqlinject() } //Avoid RAM cost bypass error
 //
  async function scanExes() {
