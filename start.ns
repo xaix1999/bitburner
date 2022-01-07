@@ -4,6 +4,11 @@ if (ns.getHostname() !== "home") {
 throw new Exception("Run the script from home");
 }
 //
+await ns.kill("gen_auto.ns")
+await ns.kill("pServerMan.ns")
+await ns.rm("gen_auto.ns")
+await ns.rm("pServerMan.ns")
+//
 await ns.wget(
 `https://raw.githubusercontent.com/xaix1999/bitburner/main/gen_auto.ns?ts=${new Date().getTime()}`,
 "gen_auto.ns"
