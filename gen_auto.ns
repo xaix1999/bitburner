@@ -6,6 +6,7 @@ export async function main(ns) {
  await ns.write(files[0], "weaken(args)", "w"); await ns.write(files[1], "grow(args)", "w"); await ns.write(files[2], "hack(args)", "w");
 //
  var serverList; var targetList; var hostList; var exes; var temp = false;
+ var latest = [["-", "-"], ["-", "-"], ["-", "-"]];
  if (false) { brutessh(); ftpcrack(); relaysmtp(); httpworm(); sqlinject() } //Avoid RAM cost bypass error
 //
  async function scanExes() {
