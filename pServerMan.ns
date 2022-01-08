@@ -82,10 +82,6 @@ const settings = {
  ns.tprint(`[${localeHHMMSS()}] Starting pServer Manager`)
  settings.maxGbRam = ns.getPurchasedServerMaxRam()
  settings.maxPlayerServers = ns.getPurchasedServerLimit()
- //let hostname = ns.getHostname()
- //if (hostname !== 'home') {
- //throw new Exception('Run the script from home')
- }
  while (true) {
  let didChange = false
  const serverMap = getItem(settings.keys.serverMap)
