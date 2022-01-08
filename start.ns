@@ -6,6 +6,8 @@ export async function main(ns) {
 //
  ns.kill("gen_auto.ns", "home")
  ns.kill("pServerMan.ns", "home")
+ ns.kill("hnet.ns", "home")
+ ns.kill("stonks.ns", "home")
  ns.rm("gen_auto.ns", "home")
  ns.rm("pServerMan.ns", "home")
 //
@@ -19,6 +21,18 @@ export async function main(ns) {
  "pServerMan.ns"
  );
 //
+ await ns.wget(
+ `https://raw.githubusercontent.com/xaix1999/bitburner/main/hnet.ns?ts=${new Date().getTime()}`,
+ "hnet.ns"
+ );
+//
+ await ns.wget(
+ `https://raw.githubusercontent.com/xaix1999/bitburner/main/stonks.ns?ts=${new Date().getTime()}`,
+ "stonks.ns"
+ );
+//
  ns.run("gen_auto.ns", 1);
  ns.run("pServerMan.ns", 1);
+ ns.run("hnet.ns", 1);
+ ns.run("stonks.ns", 1);
  }
