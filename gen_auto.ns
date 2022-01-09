@@ -32,7 +32,7 @@ export async function main(ns) {
  async function checkServers() {//Sorts servers into lists based on RAM and money/hack time ratio: hostList and targetList
  targetList = []; hostList = [[ns.getServerMaxRam("home"), "home"]];
  if (1) {//Adds in player servers
- temp = ns.getPurchasedServers()
+ temp = ns.getPurchasedServers();
  for (let i = 0; i < temp.length; i++) {
  hostList.push([ns.getServerMaxRam(temp[i]), temp[i]])
  await ns.scp(files, "home", temp[i]);
@@ -52,7 +52,7 @@ export async function main(ns) {
  if (ns.getServerMaxRam(cTarget) > 2 && !hostList.includes(cTarget)) {
  hostList.push(temp); hostList = arraySort(hostList)
  }
- await ns.scp(files, 'home', cTarget)
+ await ns.scp(files, "home", cTarget)
  }
  }
  }
@@ -73,11 +73,11 @@ export async function main(ns) {
  if (threads > 2) {
  ns.exec("weak.script", hHost, Math.ceil(0.08 * threads), hTarget);
  ns.exec("grow.script", hHost, Math.floor(0.92 * threads), hTarget);
- }else { ns.exec("grow.script", hHost, threads, hTarget) }
- }else if (ns.getServerSecurityLevel(hTarget) > ns.getServerMinSecurityLevel(hTarget) + 5) {//Security target here
+ } else { ns.exec("grow.script", hHost, threads, hTarget) }
+ } else if (ns.getServerSecurityLevel(hTarget) > ns.getServerMinSecurityLevel(hTarget) + 5) {//Security target here
  latest[1][0] = hHost; latest[1][1] = hTarget;
  ns.exec("weak.script", hHost, threads, hTarget);
- }else {
+ } else {
  while (parseFloat(ns.hackAnalyze(hTarget)) * threads > .4) { threads--; bThreads++ }//Hack limit here
  latest[2][0] = hHost; latest[2][1] = hTarget;
  if (threads < 1) {threads = 1};
