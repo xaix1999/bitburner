@@ -35,6 +35,6 @@ export async function main(ns) {
 //
  ns.run("gen_auto.ns", 1);
  ns.run("pserv.ns", 1);
- ns.run("hnet.ns", 1);
- ns.run("stonks.ns", 1);
+ //ns.run("hnet.ns", 1);
+ //ns.run("stonks.ns", 1);
  }
