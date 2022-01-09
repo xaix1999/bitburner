@@ -149,7 +149,7 @@ const settings = {
  }
  }
  if (!didChange) {
- await ns.asleep(5123)
+ await ns.sleep(5000)
  }
  }
  }
