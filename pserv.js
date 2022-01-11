@@ -4,7 +4,7 @@ const settings = {
  gbRamCost: 55000,
  maxGbRam: 1048576,
  minGbRam: 64,
- totalMoneyAllocation: 0.5,
+ totalMoneyAllocation: 0.1,
  actions: {
  BUY: 'buy',
  UPGRADE: 'upgrade',
@@ -49,7 +49,7 @@ const settings = {
  growth: ns.getServerGrowth(host),
  minSecurityLevel: ns.getServerMinSecurityLevel(host),
  baseSecurityLevel: ns.getServerBaseSecurityLevel(host),
- ram: ns.getServerRam(host)[0],
+ ram: ns.getServerMaxRam(host),//[0],
  connections: ['home'],
  parent: 'home',
  children: [],
@@ -66,10 +66,11 @@ const settings = {
  let purchasedServers = ns.getPurchasedServers()
  if (purchasedServers.length) {
  purchasedServers.sort((a, b) => {
- const totalRamA = ns.getServerRam(a).shift()
- const totalRamB = ns.getServerRam(b).shift()
+ const totalRamA = ns.getServerMaxRam(a)//.shift()
+ const totalRamB = ns.getServerUsedRam(b)//.shift()
  if (totalRamA === totalRamB) {
- return ns.getServerRam(a).shift() - ns.getServerRam(b).shift()
+ //return ns.getServerMaxRam(a).shift() - ns.getServerUsedRam(b).shift()
+ return ns.getServerMaxRam(a) - ns.getServerUsedRam(b)
  } else {
  return totalRamA - totalRamB
  }
@@ -88,7 +89,7 @@ const settings = {
  let purchasedServers = getPurchasedServers(ns)
  let action = purchasedServers.length < settings.maxPlayerServers ? settings.actions.BUY : settings.actions.UPGRADE
  if (action == settings.actions.BUY) {
- let smallestCurrentServer = purchasedServers.length ? ns.getServerRam(purchasedServers[0]).shift() : 0
+ let smallestCurrentServer = purchasedServers.length ? ns.getServerMaxRam(purchasedServers[0]) : 0 //.shift() : 0
  let targetRam = Math.max(settings.minGbRam, smallestCurrentServer)
  if (targetRam === settings.minGbRam) {
  while (ns.getServerMoneyAvailable('home') * settings.totalMoneyAllocation >= targetRam * settings.gbRamCost * settings.maxPlayerServers) {
@@ -108,8 +109,8 @@ const settings = {
  }
  }
  } else {
- let smallestCurrentServer = Math.max(ns.getServerRam(purchasedServers[0]).shift(), settings.minGbRam)
- let biggestCurrentServer = ns.getServerRam(purchasedServers[purchasedServers.length - 1]).shift()
+ let smallestCurrentServer = Math.max(ns.getServerMaxRam(purchasedServers[0]), settings.minGbRam)//.shift(), settings.minGbRam)
+ let biggestCurrentServer = ns.getServerMaxRam(purchasedServers[purchasedServers.length - 1])//.shift()
  let targetRam = biggestCurrentServer
  if (smallestCurrentServer === settings.maxGbRam) {
  ns.tprint(`[${localeHHMMSS()}] All servers maxxed. Exiting.`)
@@ -124,12 +125,12 @@ const settings = {
  }
  targetRam = Math.min(targetRam, settings.maxGbRam)
  purchasedServers = getPurchasedServers(ns)
- if (targetRam > ns.getServerRam(purchasedServers[0]).shift()) {
+ if (targetRam > ns.getServerMaxRam(purchasedServers[0])) { //.shift()) {
  didChange = true
  while (didChange) {
  didChange = false
  purchasedServers = getPurchasedServers(ns)
- if (targetRam > ns.getServerRam(purchasedServers[0]).shift()) {
+ if (targetRam > ns.getServerMaxRam(purchasedServers[0])) { //.shift()) {
  if (ns.getServerMoneyAvailable('home') * settings.totalMoneyAllocation >= targetRam * settings.gbRamCost) {
  let hostname = `s-${targetRam}-${createUUID()}`
  await ns.killall(purchasedServers[0])
