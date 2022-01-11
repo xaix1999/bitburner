@@ -6,11 +6,10 @@ export async function main(ns) {
  await ns.write(files[0], "weaken(args)", "w"); await ns.write(files[1], "grow(args)", "w"); await ns.write(files[2], "hack(args)", "w");
 //
  var serverList; var targetList; var hostList; var exes; var temp = false;
- var latest = [["-", "-"], ["-", "-"], ["-", "-"]];
  if (false) { brutessh(); ftpcrack(); relaysmtp(); httpworm(); sqlinject() } //Avoid RAM cost bypass error
 //
  async function scanExes() {
- exes = ["BruteSSH", "FTPCrack", "relaySMTP", "SQLInject", "HTTPWorm"];
+ exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
  for (let i = 0; i <= exes.length - 1; i++) { if (!ns.fileExists(exes[i] + ".exe")) { exes.splice(i, 1); i-- } }//Removes EXEs you don't have
  }
 //
@@ -31,7 +30,7 @@ export async function main(ns) {
 //
  async function checkServers() {//Sorts servers into lists based on RAM and money/hack time ratio: hostList and targetList
  targetList = []; hostList = [[ns.getServerMaxRam("home"), "home"]];
- if (1) {//Adds in player servers
+ if (true) {//Adds in player servers
  temp = ns.getPurchasedServers();
  for (let i = 0; i < temp.length; i++) {
  hostList.push([ns.getServerMaxRam(temp[i]), temp[i]])
@@ -63,23 +62,19 @@ export async function main(ns) {
  for (let i = 0; i <= hostList.length - 1; i++) {
  if (tarIndex > targetList.length - 1) { tarIndex = 0; loop = true };
  let hHost = hostList[i][1]; let hTarget = targetList[tarIndex][1]; let freeRam;
- if (hHost == "home") { freeRam = Math.max(ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) - 50, 0) } else {
- freeRam = ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost)
- }
+ if (hHost == "home") {
+ freeRam = Math.max(ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) - 50, 0)
+ } else { freeRam = ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) }
  if (freeRam >= 4) {
  let threads = Math.floor(freeRam / 1.75); let bThreads = 0;
  if (ns.getServerMoneyAvailable(hTarget) < ns.getServerMaxMoney(hTarget) * .70 || loop) {//Server money target here
- latest[0][0] = hHost; latest[0][1] = hTarget;
  if (threads > 2) {
  ns.exec("weak.script", hHost, Math.ceil(0.08 * threads), hTarget);
  ns.exec("grow.script", hHost, Math.floor(0.92 * threads), hTarget);
- } else { ns.exec("grow.script", hHost, threads, hTarget) }
+ } else { ns.exec("grow.script", hHost, (threads), hTarget) }
  } else if (ns.getServerSecurityLevel(hTarget) > ns.getServerMinSecurityLevel(hTarget) + 5) {//Security target here
- latest[1][0] = hHost; latest[1][1] = hTarget;
- ns.exec("weak.script", hHost, threads, hTarget);
- } else {
- while (parseFloat(ns.hackAnalyze(hTarget)) * threads > .4) { threads--; bThreads++ }//Hack limit here
- latest[2][0] = hHost; latest[2][1] = hTarget;
+ ns.exec("weak.script", hHost, (threads), hTarget);
+ } else { while (parseFloat(ns.hackAnalyze(hTarget)) * threads > .4) { threads--; bThreads++ }//Hack limit here
  if (threads < 1) {threads = 1};
  ns.exec("hack.script", hHost, (threads), hTarget);
  if (bThreads > 0) { ns.exec("weak.script", hHost, bThreads, hTarget) };
