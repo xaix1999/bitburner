@@ -35,12 +35,12 @@
  ns.hacknet.upgradeCore(nodeIndex, 1);
  break;
  }
- await ns.sleep(1);
  }
  }
 //
- async function waitForMoney(ns, targetMoney, delayTime, thresholdMultiplier) {
- while (ns.getPlayer().money / thresholdMultiplier < targetMoney) {
- await ns.sleep(delayTime);
+ async function waitForMoney(ns) {
+ while (ns.hacknet.numHashes() >= 4) {
+ ns.hacknet.spendHashes("Sell for Money")
  }
+ await ns.sleep(1000);
  }
