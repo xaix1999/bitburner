@@ -38,9 +38,11 @@
  }
  }
 //
- async function waitForMoney(ns) {
+ async function waitForMoney(ns, targetMoney, delayTime, thresholdMultiplier) {
+ if (ns.getPlayer().money / thresholdMultiplier < targetMoney) {
+ await ns.sleep(delayTime);
  while (ns.hacknet.numHashes() >= 4) {
  ns.hacknet.spendHashes("Sell for Money")
+ await ns.sleep(10);
  }
- await ns.sleep(1000);
- }
+ }}
