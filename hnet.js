@@ -44,7 +44,7 @@
  }
 //
  async function waitForMoney(ns, targetMoney, delayTime, thresholdMultiplier) {
- if (ns.getPlayer().money / thresholdMultiplier < targetMoney) {
+ if (ns.getPlayer().money / thresholdMultiplier < targetMoney * 2) {
  await ns.sleep(delayTime);
  while (ns.hacknet.numHashes() >= 4) {
  ns.hacknet.spendHashes("Sell for Money")
