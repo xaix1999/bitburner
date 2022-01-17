@@ -63,7 +63,7 @@ export async function main(ns) {
  if (tarIndex > targetList.length - 1) { tarIndex = 0; loop = true };
  let hHost = hostList[i][1]; let hTarget = targetList[tarIndex][1]; let freeRam;
  if (hHost == "home") {
- freeRam = Math.max(ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) - 50, 0)
+ freeRam = Math.max(ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) - 32, 0)
  } else { freeRam = ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) }
  if (freeRam >= 4) {
  let threads = Math.floor(freeRam / 1.75); let bThreads = 0;
