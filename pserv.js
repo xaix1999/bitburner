@@ -72,6 +72,9 @@ const settings = {
  }
 //
  export async function main(ns) {
+	ns.disableLog('disableLog')
+	ns.disableLog('sleep')
+	ns.disableLog('getServerMoneyAvailable')
 	ns.disableLog('getServerMaxRam')
 	ns.disableLog('getServerUsedRam')
  ns.tprint(`[${localeHHMMSS()}] Starting pServer Manager`)
