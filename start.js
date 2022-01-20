@@ -23,6 +23,6 @@ export async function main(ns) {
 //
  ns.run("gen_auto.js", 1);
  ns.run("pserv.js", 1);
- ns.run("hnet.js", 1);
+ //ns.run("hnet.js", 1);
  //ns.run("stonks.js", 1);
  }
