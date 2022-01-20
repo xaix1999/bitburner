@@ -13,28 +13,16 @@ export async function main(ns) {
  ns.rm("hnet.js", "home")
  ns.rm("stonks.js", "home")
 //
- await ns.wget(
- `https://raw.githubusercontent.com/xaix1999/bitburner/main/gen_auto.js?ts=${new Date().getTime()}`,
- "gen_auto.js"
- );
+ await ns.wget("https://raw.githubusercontent.com/xaix1999/bitburner/main/gen_auto.js", "gen_auto.js");
 //
- await ns.wget(
- `https://raw.githubusercontent.com/xaix1999/bitburner/main/pserv.js?ts=${new Date().getTime()}`,
- "pserv.js"
- );
+ await ns.wget("https://raw.githubusercontent.com/xaix1999/bitburner/main/pserv.js", "pserv.js");
 //
- await ns.wget(
- `https://raw.githubusercontent.com/xaix1999/bitburner/main/hnet.js?ts=${new Date().getTime()}`,
- "hnet.js"
- );
+ await ns.wget("https://raw.githubusercontent.com/xaix1999/bitburner/main/hnet.js", "hnet.js");
 //
- await ns.wget(
- `https://raw.githubusercontent.com/xaix1999/bitburner/main/stonks.js?ts=${new Date().getTime()}`,
- "stonks.js"
- );
+ await ns.wget("https://raw.githubusercontent.com/xaix1999/bitburner/main/stonks.js", "stonks.js");
 //
  ns.run("gen_auto.js", 1);
  ns.run("pserv.js", 1);
- //ns.run("hnet.js", 1);
+ ns.run("hnet.js", 1);
  //ns.run("stonks.js", 1);
  }
