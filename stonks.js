@@ -19,7 +19,7 @@ export async function main(ns) {
  }
  buyPositions(stock);
  }
- ns.print('Cycle Complete');
+ //ns.print('Cycle Complete');
  await ns.sleep(6000);
  }
 //
