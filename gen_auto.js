@@ -80,7 +80,7 @@ export async function main(ns) {
  if (bThreads > 0) { ns.exec("weak.script", hHost, bThreads, hTarget) };
  }
  }
- tarIndex++;
+ tarIndex++
  }
  }
 //
