@@ -1,8 +1,6 @@
 /** @param {NS} ns **/
  export async function main(ns) {
 	 ns.disableLog("sleep")
- let delayTime = ns.args[0] || 1000;
- let thresholdMultiplier = ns.args[1] || 1; //Bigger threshold, the less it spends
  while (true) {
  let ownedNodes = ns.hacknet.numNodes();
  let minValue = ns.hacknet.getPurchaseNodeCost();
@@ -22,7 +20,7 @@
  upgradeType = upgrades.indexOf(value);
  }
  }
- await waitForMoney(ns, minValue, delayTime, thresholdMultiplier);
+ await waitForMoney(ns, minValue);
  switch (upgradeType) {
  case -1:
  ns.hacknet.purchaseNode();
@@ -43,9 +41,9 @@
  }
  }
 //
- async function waitForMoney(ns, targetMoney, delayTime, thresholdMultiplier) {
- while (ns.getPlayer().money / thresholdMultiplier < targetMoney * 2) {
- await ns.sleep(delayTime);
+ async function waitForMoney(ns, targetMoney) {
+ while (ns.getPlayer().money < targetMoney * 2) {
+ await ns.sleep(1000);
  while (ns.hacknet.numHashes() >= 4) {
  ns.hacknet.spendHashes("Sell for Money")
  await ns.sleep(10);
