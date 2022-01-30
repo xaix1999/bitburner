@@ -39,7 +39,7 @@ export async function main(ns) {
  }
  for (let i = 0; i <= serverList.length - 1; i++) {
  let cTarget = serverList[i];
- if (ns.getServerMoneyAvailable(cTarget) > 0 || ns.getServerMaxRam(cTarget) > 2) {
+ if (ns.serverExists(cTarget)) {if (ns.getServerMoneyAvailable(cTarget) > 0 || ns.getServerMaxRam(cTarget) > 2) {
  if (ns.getServerNumPortsRequired(cTarget) <= exes.length) {
  for (let i = 0; i <= exes.length - 1; i++) { ns[exes[i].toLowerCase()](cTarget) }
  ns.nuke(cTarget);
@@ -53,7 +53,7 @@ export async function main(ns) {
  }
  await ns.scp(files, "home", cTarget)
  }
- }
+ }}
  }
  }
 //
@@ -64,7 +64,7 @@ export async function main(ns) {
  let hHost = hostList[i][1]; let hTarget = targetList[tarIndex][1]; let freeRam;
  if (hHost == "home") {
  freeRam = Math.max(ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) - 32, 0)
- } else { freeRam = ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) }
+ } else { if (ns.serverExists(hHost)) {freeRam = ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) }}
  if (freeRam >= 4) {
  let threads = Math.floor(freeRam / 1.75); let bThreads = 0;
  if (ns.getServerMoneyAvailable(hTarget) < ns.getServerMaxMoney(hTarget) * .70 || loop) {//Server money target here
@@ -76,8 +76,10 @@ export async function main(ns) {
  ns.exec("weak.script", hHost, (threads), hTarget);
  } else { while (parseFloat(ns.hackAnalyze(hTarget)) * threads > .4) { threads--; bThreads++ }//Hack limit here
  if (threads < 1) {threads = 1};
+  if (hTarget == "n00dles") {} else {
+  ns.tprintf("[" + Date()[16]+Date()[17]+Date()[18]+Date()[19]+Date()[20]+Date()[21]+Date()[22]+Date()[23] + "] " + hHost + " is hacking " + hTarget + " with $" + Math.trunc(ns.getServerMoneyAvailable(hTarget)) + " and " + threads + " threads.");
  ns.exec("hack.script", hHost, (threads), hTarget);
- if (bThreads > 0) { ns.exec("weak.script", hHost, bThreads, hTarget) };
+ if (bThreads > 0) { ns.exec("weak.script", hHost, bThreads, hTarget) }; }
  }
  }
  tarIndex++
@@ -86,8 +88,11 @@ export async function main(ns) {
 //
  while (true) {//loops functions
  await scanExes();
+ await ns.sleep(1000);
  await scanServers();
+ await ns.sleep(1000);
  await checkServers();
+ await ns.sleep(1000);
  await hackAll();
  await ns.sleep(1000);
  }}
