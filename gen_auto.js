@@ -2,6 +2,16 @@
 export async function main(ns) {
  ns.disableLog("ALL"); //Visual clarity
 //
+ var date1 = Date()[16]
+ var date2 = Date()[17]
+ var date3 = Date()[18]
+ var date4 = Date()[19]
+ var date5 = Date()[20]
+ var date6 = Date()[21]
+ var date7 = Date()[22]
+ var date8 = Date()[23]
+ const dates = date1+date2+date3+date4+date5+date6+date7+date8 
+//
  var files = ["weak.script", "grow.script", "hack.script"];//No touching, unless you understand everything here
  await ns.write(files[0], "weaken(args)", "w"); await ns.write(files[1], "grow(args)", "w"); await ns.write(files[2], "hack(args)", "w");
 //
@@ -63,7 +73,8 @@ export async function main(ns) {
  if (tarIndex > targetList.length - 1) { tarIndex = 0; loop = true };
  let hHost = hostList[i][1]; let hTarget = targetList[tarIndex][1]; let freeRam;
  if (hHost == "home") {
- freeRam = Math.max(ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) - 32, 0)
+ //freeRam = Math.max(ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) - 32, 0)
+ freeRam = 0;
  } else { if (ns.serverExists(hHost)) {freeRam = ns.getServerMaxRam(hHost) - ns.getServerUsedRam(hHost) }}
  if (freeRam >= 4) {
  let threads = Math.floor(freeRam / 1.75); let bThreads = 0;
@@ -76,8 +87,8 @@ export async function main(ns) {
  ns.exec("weak.script", hHost, (threads), hTarget);
  } else { while (parseFloat(ns.hackAnalyze(hTarget)) * threads > .4) { threads--; bThreads++ }//Hack limit here
  if (threads < 1) {threads = 1};
-  if (hTarget == "n00dles") {} else {
-  ns.tprintf("[" + Date()[16]+Date()[17]+Date()[18]+Date()[19]+Date()[20]+Date()[21]+Date()[22]+Date()[23] + "] " + hHost + " is hacking " + hTarget + " with $" + Math.trunc(ns.getServerMoneyAvailable(hTarget)) + " and " + threads + " threads.");
+ if (hTarget == "n00dles") {} else {
+  ns.tprintf("["+dates+"] "+hHost+" is hacking "+hTarget+" with $"+Math.trunc(ns.getServerMoneyAvailable(hTarget))+" and "+threads+" threads.");
  ns.exec("hack.script", hHost, (threads), hTarget);
  if (bThreads > 0) { ns.exec("weak.script", hHost, bThreads, hTarget) }; }
  }
