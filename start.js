@@ -5,7 +5,7 @@ export async function main(ns) {
  }
 //
  ns.kill("gen_auto.js", "home")
- ns.kill("pServerMan.js", "home")
+ ns.kill("pserv.js", "home")
  ns.kill("hnet.js", "home")
  ns.kill("stonks.js", "home")
  ns.rm("gen_auto.js", "home")
