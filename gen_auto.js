@@ -78,7 +78,7 @@ export async function main(ns) {
  } else { while (parseFloat(ns.hackAnalyze(hTarget)) * threads > .4) { threads--; bThreads++ }//Hack limit here
  if (threads < 1) {threads = 1};
  if (hTarget == "n00dles") {} else {
-  //ns.tprintf("["+Date()[16]+Date()[17]+Date()[18]+Date()[19]+Date()[20]+Date()[21]+Date()[22]+Date()[23]+"] "+hHost+" is hacking "+hTarget+" with $"+Math.trunc(ns.getServerMoneyAvailable(hTarget))+" and "+threads+" threads.");
+  //ns.tprintf("["+Date().substring(16, 24)+"] "+hHost+" is hacking "+hTarget+" with $"+Math.trunc(ns.getServerMoneyAvailable(hTarget))+" and "+threads+" threads.");
  ns.exec("hack.script", hHost, (threads), hTarget);
  if (bThreads > 0) { ns.exec("weak.script", hHost, bThreads, hTarget) }; }
  }
