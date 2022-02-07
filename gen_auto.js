@@ -88,12 +88,13 @@ export async function main(ns) {
  }
 //
  while (true) {//loops functions
- await scanExes();
+ //await scanExes();
  await ns.sleep(1000);
- await scanServers();
+ //await scanServers();
  await ns.sleep(1000);
- await checkServers();
+ //await checkServers();
  await ns.sleep(1000);
- await hackAll();
+ //await hackAll();
  await ns.sleep(1000);
+  await ns.exit();
  }}
