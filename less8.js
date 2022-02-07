@@ -91,7 +91,7 @@ export async function main(ns) {
                 if (ns.getServerMoneyAvailable(targetList[x][1]) <= (ns.getServerMaxMoney(targetList[x][1]) * .70)) {
                     if (hostList[i][1] == "home") { freeRam = 0; } else { if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) } }
                     if (ns.fileExists(files[1], hostList[i][1])) { } else { await ns.scp(files[1], "home", hostList[i][1]); }
-                    var gThreads = Math.max(Math.trunc(freeRam / 1.76), 0);
+                    var gThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
                     if (gThreads <= 1 || gThreads == null) { } else {
                         //if (ns.getGrowTime(targetList[x][1]) < 600000) {
                             ns.print(files[1] + "-" + hostList[i][1] + "-" + gThreads + "-" + targetList[x][1]);
@@ -102,7 +102,7 @@ export async function main(ns) {
                 if (ns.getServerSecurityLevel(targetList[x][1]) >= (ns.getServerMinSecurityLevel(targetList[x][1]) + 5)) {
                     if (hostList[i][1] == "home") { freeRam = 0; } else { if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) } }
                     if (ns.fileExists(files[0], hostList[i][1])) { } else { await ns.scp(files[0], "home", hostList[i][1]); }
-                    var wThreads = Math.max(Math.trunc(freeRam / 1.76 - gThreads), 0);
+                    var wThreads = Math.max(Math.trunc(freeRam / 1.75 - gThreads), 0);
                     if (wThreads <= 1 || wThreads == null) { } else {
                         //if (ns.getWeakenTime(targetList[x][1]) < 600000) {
                             ns.print(files[0] + "-" + hostList[i][1] + "-" + wThreads + "-" + targetList[x][1]);
@@ -115,7 +115,7 @@ export async function main(ns) {
                     if (ns.getServerMoneyAvailable(targetList[x][1]) >= ns.getServerMaxMoney(targetList[x][1]) * .70) {
                         if (ns.fileExists(files[2], hostList[i][1])) { } else { await ns.scp(files[2], "home", hostList[i][1]); }
                         //while (parseFloat(ns.hackAnalyze(targetList[x][1])) * hThreads > 0.40) { hThreads--; await ns.sleep(1); };
-                        var hThreads = Math.max(Math.trunc(freeRam / 1.71 - gThreads - wThreads), 0);
+                        var hThreads = Math.max(Math.trunc(freeRam / 1.70 - gThreads - wThreads), 0);
                         if (hThreads <= 1 || hThreads == null) { } else {
                             ns.print(files[2] + "-" + hostList[i][1] + "-" + hThreads + "-" + targetList[x][1]);
                             await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1]);
