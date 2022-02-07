@@ -10,7 +10,7 @@ V1.4.0 compatible
 
 less8.js - 6.00 GB - Rewrite of gen_auto.js to use less than 8 GB for fresh new runs. It will pickup player owned servers as long as the name is similiar to the pserv.js format, or more exactly, starts with "s-".
 
-gen_auto.js - 8.20 GB - Was recently updated to avoid a race condition with a player owned server suddenly not being available. // i will likely change the name to something better
+gen_auto.js - 8.20 GB - deprecated
 
 hnet.js - 6.10 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells.
 
