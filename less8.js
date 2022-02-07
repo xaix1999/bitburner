@@ -6,7 +6,6 @@ export async function main(ns) {
     var hostList;
     var targetList;
     var files = ["weak.js", "grow.js", "hack.js"];
-    var exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
     if (false) { brutessh(); ftpcrack(); relaysmtp(); httpworm(); sqlinject() }
     //
     await ns.write(files[0], "export async function main(ns) { var target = ns.args[0] ; await ns.weaken(target); }", "w");
@@ -38,6 +37,7 @@ export async function main(ns) {
     ns.disableLog("scan")
     //
     async function scanExes() {
+        var exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
         for (let i = 0; i <= exes.length - 1; i++) { if (!ns.fileExists(exes[i] + ".exe", "home")) { exes.splice(i, 1); i-- } }
         for (let i = 0; i <= hTarget.length - 1; i++) {
             if (ns.serverExists(hTarget[i])) {
@@ -73,7 +73,7 @@ export async function main(ns) {
         for (let i = 0; i <= scanAdd.length - 1; i++) {
             let sTarget = scanAdd[i]
             if (scanAdd[i].startsWith("s-")) {
-            if (ns.serverExists(sTarget) && ns.hasRootAccess(sTarget)) {
+                if (ns.serverExists(sTarget) && ns.hasRootAccess(sTarget)) {
                     temp = [ns.getServerMaxRam(sTarget), sTarget]
                     if (ns.getServerMaxRam(sTarget) > 64 && !hostList.includes(sTarget)) {
                         hostList.push(temp); hostList = arraySort(hostList)
@@ -84,56 +84,63 @@ export async function main(ns) {
     }
 
     async function theBusiness() {
+        let x = 0;
         for (let i = 0; i <= hostList.length - 1; i++) {
             if (ns.serverExists(hostList[i][1])) {
-                let x = 0; let freeRam; var gThreads = 0; var wThreads = 0; var hThreads = 0;
+                let freeRam; var gThreads = 0; var wThreads = 0; var hThreads = 0;
+                if (x > targetList.length - 1) { x = 0; };
                 //freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1])
                 if (ns.getServerMoneyAvailable(targetList[x][1]) <= (ns.getServerMaxMoney(targetList[x][1]) * .70)) {
                     if (hostList[i][1] == "home") { freeRam = 0; } else { if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) } }
                     if (ns.fileExists(files[1], hostList[i][1])) { } else { await ns.scp(files[1], "home", hostList[i][1]); }
-                    var gThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
+                    if (ns.fileExists(files[0], hostList[i][1])) { } else { await ns.scp(files[0], "home", hostList[i][1]); }
+                    var gThreads = Math.max(Math.floor(freeRam * 0.9 / 1.75), 0);
+                    var wThreads = Math.max(Math.ceil(freeRam * 0.1 / 1.75), 0);
                     if (gThreads <= 1 || gThreads == null) { } else {
                         //if (ns.getGrowTime(targetList[x][1]) < 600000) {
-                            ns.print(files[1] + "-" + hostList[i][1] + "-" + gThreads + "-" + targetList[x][1]);
-                            await ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1]);
+                        ns.print("[" + Date().substr(16, 8) + "] " + files[1] + "-" + hostList[i][1] + "-g" + gThreads + "-w" + wThreads + "-" + targetList[x][1]);
+                        await ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1]);
+                        await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1]);
                         //}
                     }
                 }
-                if (ns.getServerSecurityLevel(targetList[x][1]) >= (ns.getServerMinSecurityLevel(targetList[x][1]) + 5)) {
+                else if (ns.getServerSecurityLevel(targetList[x][1]) >= (ns.getServerMinSecurityLevel(targetList[x][1]) + 5)) {
                     if (hostList[i][1] == "home") { freeRam = 0; } else { if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) } }
                     if (ns.fileExists(files[0], hostList[i][1])) { } else { await ns.scp(files[0], "home", hostList[i][1]); }
-                    var wThreads = Math.max(Math.trunc(freeRam / 1.75 - gThreads), 0);
+                    var wThreads = Math.max(Math.trunc(freeRam / 1.75 - gThreads - wThreads), 0);
                     if (wThreads <= 1 || wThreads == null) { } else {
                         //if (ns.getWeakenTime(targetList[x][1]) < 600000) {
-                            ns.print(files[0] + "-" + hostList[i][1] + "-" + wThreads + "-" + targetList[x][1]);
-                            await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1]);
+                        ns.print("[" + Date().substr(16, 8) + "] " + files[0] + "-" + hostList[i][1] + "-w" + wThreads + "-" + targetList[x][1]);
+                        await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1]);
                         //}
                     }
                 }
-                if (ns.getServerSecurityLevel(targetList[x][1]) <= (ns.getServerMinSecurityLevel(targetList[x][1]) + 5)) {
+                else if (ns.getServerSecurityLevel(targetList[x][1]) <= (ns.getServerMinSecurityLevel(targetList[x][1]) + 5)) {
                     if (hostList[i][1] == "home") { freeRam = 0; } else { if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) } }
                     if (ns.getServerMoneyAvailable(targetList[x][1]) >= ns.getServerMaxMoney(targetList[x][1]) * .70) {
                         if (ns.fileExists(files[2], hostList[i][1])) { } else { await ns.scp(files[2], "home", hostList[i][1]); }
                         //while (parseFloat(ns.hackAnalyze(targetList[x][1])) * hThreads > 0.40) { hThreads--; await ns.sleep(1); };
                         var hThreads = Math.max(Math.trunc(freeRam / 1.70 - gThreads - wThreads), 0);
                         if (hThreads <= 1 || hThreads == null) { } else {
-                            ns.print(files[2] + "-" + hostList[i][1] + "-" + hThreads + "-" + targetList[x][1]);
+                            ns.print("[" + Date().substr(16, 8) + "] " + files[2] + "-" + hostList[i][1] + "-h" + hThreads + "-" + targetList[x][1]);
                             await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1]);
                         }
                     }
                 }
-            }
+            } x++
         }
+
     }
 
     while (true) {
-        await ns.clearLog();
-        await scanExes();
-        await sortServers();
+        //ns.clearLog();
+        ns.tail("less8.js")
+        await scanExes()
+        await sortServers()
         //ns.print("[" + Date().substr(16, 8) + "] " + hostList);
-        ns.print("[" + Date().substr(16, 8) + "] " + targetList[0]);
-        await theBusiness();
-        await ns.sleep(1000);
+        //ns.print("[" + Date().substr(16, 8) + "] " + targetList[0]);
+        await theBusiness()
+        await ns.sleep(1000)
         //ns.exit();
     }
 }
