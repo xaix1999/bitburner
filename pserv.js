@@ -20,7 +20,7 @@ export async function main(ns) {
 	}
 	//
 	function arraySort(array) { return array.sort(function (a, b) { return b[0] - a[0] }) }
-	var hostList = []
+	var hostList = [[],[]]
 	var temp = false
 	//
 	async function scanAdd() {
