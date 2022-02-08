@@ -15,7 +15,7 @@ export async function main(ns) {
     function arraySort(array) { return array.sort(function (a, b) { return b[0] - a[0] }) }
     //
     ns.clearLog();
-    ns.disableLog("disableLog")
+    ns.disableLog("disableLog");
     ns.disableLog("getServerSecurityLevel");
     ns.disableLog("getServerMinSecurityLevel");
     ns.disableLog("getServerMaxMoney");
@@ -34,7 +34,7 @@ export async function main(ns) {
     ns.disableLog("relaysmtp");
     ns.disableLog("httpworm");
     ns.disableLog("sqlinject");
-    ns.disableLog("scan")
+    ns.disableLog("scan");
     //
     async function scanExes() {
         var exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
@@ -64,7 +64,7 @@ export async function main(ns) {
                     }
                     temp = [ns.getServerMaxRam(sTarget), sTarget]
                     if (ns.getServerMaxRam(sTarget) > 2 && !hostList.includes(sTarget)) {
-                        hostList.push(temp); hostList = arraySort(hostList)
+                        hostList.push(temp); hostList = arraySort(hostList);
                     }
                 }
             }
@@ -76,7 +76,7 @@ export async function main(ns) {
                 if (ns.serverExists(sTarget) && ns.hasRootAccess(sTarget)) {
                     temp = [ns.getServerMaxRam(sTarget), sTarget]
                     if (ns.getServerMaxRam(sTarget) > 64 && !hostList.includes(sTarget)) {
-                        hostList.push(temp); hostList = arraySort(hostList)
+                        hostList.push(temp); hostList = arraySort(hostList);
                     }
                 }
             }
@@ -131,16 +131,13 @@ export async function main(ns) {
         }
 
     }
-
+ns.tail("less8.js");
     while (true) {
         //ns.clearLog();
-        ns.tail("less8.js")
-        await scanExes()
-        await sortServers()
-        //ns.print("[" + Date().substr(16, 8) + "] " + hostList);
-        //ns.print("[" + Date().substr(16, 8) + "] " + targetList[0]);
-        await theBusiness()
-        await ns.sleep(1000)
+        await scanExes();
+        await sortServers();
+        await theBusiness();
+        await ns.sleep(1000);
         //ns.exit();
     }
 }
