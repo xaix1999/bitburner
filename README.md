@@ -14,7 +14,7 @@ gen_auto.js - 8.20 GB - deprecated
 
 hnet.js - 6.10 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells.
 
-pserv.js - 9.50 GB - Almost unchanged from the original. // https://github.com/moriakaice/bitburner/blob/master/src/playerServers.ns
+pserv.js - 7.35 GB - Rewritten to reduce GB.
 
 start.js - 4.15 GB - A brute force version of a wget with a start of programs.
 
