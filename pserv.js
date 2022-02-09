@@ -56,27 +56,31 @@ export async function main(ns) {
 	var x = 0;
 	var i = 0;
 	async function pServ() {
-		for (i = 0; i < settings.maxPlayerServers - 1; i++) { 
-			if (ns.serverExists(hostList[i][1])) { targetRam = (Math.min(hostList[i][0] * 4, settings.maxGbRam)) } else { targetRam = settings.minGbRam };
-			if (ns.serverExists(hostList[i][1]) && targetRam > hostList[i][0]) {
-				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
-					await ns.killall(hostList[i][1])
-					await ns.sleep(1)
-					const serverDeleted = await ns.deleteServer(hostList[i][1])
-					if (serverDeleted) {
-						let hostname = await ns.purchaseServer("s-" + Math.min(targetRam, settings.maxGbRam) + "-" + createUUID(), Math.min(targetRam, settings.maxGbRam))
-						if (hostname) {
-							ns.print("[" + Date().substr(16, 8) + "] Upgraded: " + hostList[i][1] + " into server: " + hostname + " " + targetRam + " GB)")
+		for (i = 0; i < settings.maxPlayerServers - 1; i++) {
+			if (hostList.length == settings.maxPlayerServers) {
+				if (ns.serverExists(hostList[i][1])) { targetRam = (Math.min(hostList[i][0] * 4, settings.maxGbRam)) } else { targetRam = settings.minGbRam };
+				if (ns.serverExists(hostList[i][1]) && targetRam > hostList[i][0]) {
+					if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
+						await ns.killall(hostList[i][1])
+						await ns.sleep(1)
+						const serverDeleted = await ns.deleteServer(hostList[i][1])
+						if (serverDeleted) {
+							let hostname = await ns.purchaseServer("s-" + Math.min(targetRam, settings.maxGbRam) + "-" + createUUID(), Math.min(targetRam, settings.maxGbRam))
+							if (hostname) {
+								ns.print("[" + Date().substr(16, 8) + "] Upgraded: " + hostList[i][1] + " into server: " + hostname + " " + targetRam + " GB)")
+							}
 						}
 					}
 				}
 			}
-			if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
-				if (hostList.length < ns.getPurchasedServerLimit()) {
-					let hostname; let targetRam; if (!Math.min(hostList[i][0] * 4, settings.minGbRam) > 0) { targetRam = settings.minGbRam } else { targetRam = Math.min(hostList[i][0] * 4, settings.minGbRam) }
-					hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
-					if (hostname) {
-						ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + Math.min(targetRam, settings.maxGbRam) + " GB)")
+			if (hostList.length < settings.maxPlayerServers) {
+				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
+					if (hostList.length < ns.getPurchasedServerLimit()) {
+						let hostname; let targetRam; if (!Math.min(hostList[i][0] * 4, settings.minGbRam) > 0) { targetRam = settings.minGbRam } else { targetRam = Math.min(hostList[i][0] * 4, settings.minGbRam) }
+						hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
+						if (hostname) {
+							ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + Math.min(targetRam, settings.maxGbRam) + " GB)")
+						}
 					}
 				}
 			}
@@ -87,7 +91,7 @@ export async function main(ns) {
 				ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
 				ns.exit();
 			}
-		} 
+		}
 	}
 	while (true) {
 		await scanHome();
