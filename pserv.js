@@ -20,13 +20,15 @@ export async function main(ns) {
 	}
 	//
 	function arraySort(array) { return array.sort(function (a, b) { return b[0] - a[0] }) }
-	var hostList = [[],[]]
-	var temp = false
+	var hostList = false;
+	var scanAdd = false;
+	var temp = false;
 	//
-	async function scanAdd() {
-		var scanAdd = ns.scan("home")
+	async function scanHome() {
+		hostList = [];
+		var scanAdd = ns.scan("home");
 		for (let i = 0; i <= scanAdd.length - 1; i++) {
-			let sTarget = scanAdd[i]
+			let sTarget = scanAdd[i];
 			if (scanAdd[i].startsWith("s-")) {
 				if (ns.serverExists(sTarget)) {
 					temp = [ns.getServerMaxRam(sTarget), sTarget]
@@ -50,12 +52,12 @@ export async function main(ns) {
 	ns.disableLog("scan");
 	ns.clearLog();
 	ns.print("[" + Date().substr(16, 8) + "] Starting pServer Manager")
-	var targetRam;
-	var x = 0
+	var targetRam = settings.minGbRam;
+	var x = 0;
+	var i = 0;
 	async function pServ() {
-		await scanAdd(); let i;
-		let targetRam; if (ns.serverExists(hostList[0][1])) { targetRam = (Math.min(hostList[0][0] * 2, settings.maxGbRam)) } else { targetRam = settings.minGbRam }
-		for (i = 0; i < hostList.length - 1; i++) {
+		for (i = 0; i < settings.maxPlayerServers - 1; i++) { 
+			if (ns.serverExists(hostList[i][1])) { targetRam = (Math.min(hostList[i][0] * 4, settings.maxGbRam)) } else { targetRam = settings.minGbRam };
 			if (ns.serverExists(hostList[i][1]) && targetRam > hostList[i][0]) {
 				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
 					await ns.killall(hostList[i][1])
@@ -71,8 +73,8 @@ export async function main(ns) {
 			}
 			if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
 				if (hostList.length < ns.getPurchasedServerLimit()) {
-					let hostname; let targetRam = Math.min(hostList[i][0] * 4, settings.maxGbRam)
-					hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), Math.min(targetRam, settings.maxGbRam))
+					let hostname; let targetRam; if (!Math.min(hostList[i][0] * 4, settings.minGbRam) > 0) { targetRam = settings.minGbRam } else { targetRam = Math.min(hostList[i][0] * 4, settings.minGbRam) }
+					hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
 					if (hostname) {
 						ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + Math.min(targetRam, settings.maxGbRam) + " GB)")
 					}
@@ -85,10 +87,11 @@ export async function main(ns) {
 				ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
 				ns.exit();
 			}
-		}
+		} 
 	}
 	while (true) {
-		await pServ();
-		await ns.sleep(5000);
+		await scanHome();
+		await pServ()
+		await ns.sleep(1000)
 	}
 }
