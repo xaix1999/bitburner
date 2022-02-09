@@ -58,7 +58,7 @@ export async function main(ns) {
 	async function pServ() {
 		for (i = 0; i < settings.maxPlayerServers - 1; i++) {
 			if (hostList.length == settings.maxPlayerServers) {
-				if (ns.serverExists(hostList[i][1])) { targetRam = (Math.min(hostList[i][0] * 4, settings.maxGbRam)) } else { targetRam = settings.minGbRam };
+				targetRam = (Math.min(hostList[i][0] * 4, settings.maxGbRam));
 				if (ns.serverExists(hostList[i][1]) && targetRam > hostList[i][0]) {
 					if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
 						await ns.killall(hostList[i][1])
@@ -76,7 +76,7 @@ export async function main(ns) {
 			if (hostList.length < settings.maxPlayerServers) {
 				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
 					if (hostList.length < ns.getPurchasedServerLimit()) {
-						let hostname; let targetRam; if (!Math.min(hostList[i][0] * 4, settings.minGbRam) > 0) { targetRam = settings.minGbRam } else { targetRam = Math.min(hostList[i][0] * 4, settings.minGbRam) }
+						let hostname; targetRam = settings.minGbRam
 						hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
 						if (hostname) {
 							ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + Math.min(targetRam, settings.maxGbRam) + " GB)")
@@ -95,7 +95,7 @@ export async function main(ns) {
 	}
 	while (true) {
 		await scanHome();
-		await pServ()
-		await ns.sleep(1000)
+		await pServ();
+		await ns.sleep(1000);
 	}
 }
