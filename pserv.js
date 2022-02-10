@@ -58,16 +58,17 @@ export async function main(ns) {
 	async function pServ() {
 		for (i = 0; i < settings.maxPlayerServers - 1; i++) {
 			if (hostList.length == settings.maxPlayerServers) {
-				targetRam = (Math.min(hostList[i][0] * 4, settings.maxGbRam));
-				if (ns.serverExists(hostList[i][1]) && targetRam > hostList[i][0]) {
+				var z = hostList.length - 1;
+				targetRam = (Math.min(hostList[z][0] * 4, settings.maxGbRam));
+				if (ns.serverExists(hostList[z][1]) && targetRam > hostList[z][0]) {
 					if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
-						await ns.killall(hostList[i][1])
+						await ns.killall(hostList[z][1])
 						await ns.sleep(1)
-						const serverDeleted = await ns.deleteServer(hostList[i][1])
+						const serverDeleted = await ns.deleteServer(hostList[z][1])
 						if (serverDeleted) {
 							let hostname = await ns.purchaseServer("s-" + Math.min(targetRam, settings.maxGbRam) + "-" + createUUID(), Math.min(targetRam, settings.maxGbRam))
 							if (hostname) {
-								ns.print("[" + Date().substr(16, 8) + "] Upgraded: " + hostList[i][1] + " into server: " + hostname + " " + targetRam + " GB)")
+								ns.print("[" + Date().substr(16, 8) + "] Upgraded: " + hostList[z][1] + " into server: " + hostname + " " + targetRam + " GB)")
 							}
 						}
 					}
