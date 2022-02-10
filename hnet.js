@@ -42,7 +42,7 @@
  }
 //
  async function waitForMoney(ns, targetMoney) {
- while (ns.getPlayer().money < targetMoney * 2) {
+ while (ns.getServerMoneyAvailable("home") < targetMoney * 2) {
  await ns.sleep(1000);
  while (ns.hacknet.numHashes() >= 4) {
  ns.hacknet.spendHashes("Sell for Money")
