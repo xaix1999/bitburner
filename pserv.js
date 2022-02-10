@@ -75,22 +75,24 @@ export async function main(ns) {
 				}
 			}
 			if (hostList.length < settings.maxPlayerServers) {
-				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(Math.min(targetRam, settings.maxGbRam))) {
+				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
 					if (hostList.length < ns.getPurchasedServerLimit()) {
-						let hostname; targetRam = settings.minGbRam
-						hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
+						let hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
 						if (hostname) {
-							ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + Math.min(targetRam, settings.maxGbRam) + " GB)")
+							ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + targetRam + " GB)")
 						}
 					}
 				}
 			}
 		}
+		x = 0;
 		for (i = 0; i < hostList.length - 1; i++) {
-			if (hostList[i][0] == settings.maxGbRam) { x++ }
-			if (hostList.length == settings.maxPlayerServers && x == hostList.length - 1) {
-				ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
-				ns.exit();
+			if (hostList[i][0] == settings.maxGbRam) {
+				x++;
+				if (hostList.length == settings.maxPlayerServers && x == hostList.length - 1) {
+					ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
+					ns.exit();
+				}
 			}
 		}
 	}
