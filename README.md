@@ -12,7 +12,7 @@ less8.js - 7.00 GB - Rewrite of gen_auto.js to use less than 8 GB for fresh new 
 
 gen_auto.js - 8.20 GB - deprecated
 
-hnet.js - 6.10 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells.
+hnet.js - 5.70 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells. Reduced ram usages by 0.4 GB.
 
 pserv.js - 7.35 GB - Rewritten to reduce GB.
 
