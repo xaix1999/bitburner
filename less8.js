@@ -94,8 +94,8 @@ export async function main(ns) {
                     if (hostList[i][1] == "home") { freeRam = 0; } else { if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) } }
                     if (ns.fileExists(files[1], hostList[i][1])) { } else { await ns.scp(files[1], "home", hostList[i][1]); }
                     if (ns.fileExists(files[0], hostList[i][1])) { } else { await ns.scp(files[0], "home", hostList[i][1]); }
-                    var gThreads = Math.max(Math.floor(freeRam * 0.9 / 1.75), 0);
-                    var wThreads = Math.max(Math.ceil(freeRam * 0.1 / 1.75), 0);
+                    var gThreads = Math.max(Math.floor(freeRam * 0.875 / 1.75), 0);
+                    var wThreads = Math.max(Math.ceil(freeRam * 0.125 / 1.75), 0);
                     if (gThreads <= 1 || gThreads == null) { } else {
                         //if (ns.getGrowTime(targetList[x][1]) < 600000) {
                         ns.print("[" + Date().substr(16, 8) + "] " + files[1] + "-" + hostList[i][1] + "-g" + gThreads + "-w" + wThreads + "-" + targetList[x][1]);
