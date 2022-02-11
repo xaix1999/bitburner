@@ -18,4 +18,6 @@ pserv.js - 7.35 GB - Rewritten to reduce GB.
 
 start.js - 4.15 GB - A brute force version of a wget with a start of programs.
 
-stonks.js - 21.70 GB - Stock manager requiring tix and api access.
+shortsticky.js - 26.70 GB - Stock manager requiring tix and api access.
+
+sinewave.js - 23.70 GB - Stock manger with no requirements.
