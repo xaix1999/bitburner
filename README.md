@@ -21,3 +21,5 @@ start.js - 4.15 GB - A brute force version of a wget with a start of programs.
 shortsticky.js - 26.70 GB - Stock manager requiring tix and api access.
 
 sinewave.js - 23.70 GB - Stock manger with no requirements.
+
+share.js - 7.35 GB - Script used to share() hosts with faction during hacking contracts (faction rep building).
