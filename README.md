@@ -22,4 +22,4 @@ shortsticky.js - 26.70 GB - Stock manager requiring tix and api access.
 
 sinewave.js - 23.70 GB - Stock manger with no requirements.
 
-start.js - 4.15 GB - A wget for loop with a start of "less8.js".
+start.js - 4.90 GB - A wget for loop with a start of "less8.js".
