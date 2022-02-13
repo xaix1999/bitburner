@@ -8,6 +8,8 @@ Your mileage may vary. Stocks & Hacknets seem to not be as profitable as I hoped
 
 V1.4.0 compatible
 
+corrupt.js - 242.1 / 62.1 / 17.1 GB per Source-File 4 level - Simple script to help with making money in bitnodes that have less profitable hacking.
+
 hnet.js - 5.70 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells. Reduced ram usages by 0.4 GB.
 
 less8.js - 7.10 GB - Rewrite of previous hack script to use less than 8 GB for fresh new runs. It will pickup player owned servers as long as the name is similiar to the pserv.js format, or more exactly, starts with "s-" or "hacknet-node-". Added more restrictions to the script to allow it to be less blunt, raised ram usage from 6.00 GB to 7.10 GB.
