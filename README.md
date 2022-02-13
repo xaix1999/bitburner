@@ -8,7 +8,7 @@ Your mileage may vary. Stocks & Hacknets seem to not be as profitable as I hoped
 
 V1.4.0 compatible
 
-corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to help with making money in bitnodes that have less profitable hacking.
+corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to commit crimes in bitnodes that have less profitable hacking.
 
 hnet.js - 5.70 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells. Reduced ram usages by 0.4 GB.
 
