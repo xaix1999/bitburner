@@ -2,7 +2,7 @@
 export async function main(ns) {
 	const settings = {
 		maxPlayerServers: ns.getPurchasedServerLimit(),
-		maxGbRam: 1048576,
+		maxGbRam: Math.min(ns.getPurchasedServerMaxRam(), 1048576),
 		minGbRam: 64,
 		totalMoneyAllocation: 0.5
 	}
@@ -20,6 +20,7 @@ export async function main(ns) {
 	}
 	//
 	function arraySort(array) { return array.sort(function (a, b) { return b[0] - a[0] }) }
+	//
 	var hostList = false;
 	var scanAdd = false;
 	var temp = false;
@@ -55,6 +56,7 @@ export async function main(ns) {
 	var targetRam = settings.minGbRam;
 	var x = 0;
 	var i = 0;
+	//
 	async function pServ() {
 		for (i = 0; i < settings.maxPlayerServers - 1; i++) {
 			if (hostList.length == settings.maxPlayerServers) {
