@@ -2,6 +2,7 @@
 const baseUrl = "https://raw.githubusercontent.com/xaix1999/bitburner/main/"
 const filesToDownload = [
 	"corrupt.js",
+	"doubles.js",
 	"hnet.js",
 	"less8.js",
 	"pserv.js",
