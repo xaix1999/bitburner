@@ -72,7 +72,7 @@ export async function main(ns) {
 		}
 		for (i = 0; i < settings.maxPlayerServers; i++) {
 			if (hostList.length == settings.maxPlayerServers) {
-				scanHome();
+				await scanHome();
 				var z = hostList.length - 1;
 				targetRam = (Math.min(hostList[z][0] * 4, settings.maxGbRam));
 				if (ns.serverExists(hostList[z][1]) && targetRam > hostList[z][0]) {
