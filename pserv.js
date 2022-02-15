@@ -2,7 +2,7 @@
 export async function main(ns) {
 	const settings = {
 		maxPlayerServers: ns.getPurchasedServerLimit(),
-		maxGbRam: Math.min(ns.getPurchasedServerMaxRam(), 1048576),
+		maxGbRam: ns.getPurchasedServerMaxRam(),
 		minGbRam: 64,
 		totalMoneyAllocation: 0.5
 	}
@@ -88,13 +88,12 @@ export async function main(ns) {
 			}
 		}
 		x = 0;
-		for (i = 0; i < hostList.length - 1; i++) {
+		for (i = 0; i < hostList.length; i++) {
 			if (hostList[i][0] == settings.maxGbRam) {
-				x++;
 				if (hostList.length == settings.maxPlayerServers && x == hostList.length - 1) {
 					ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
 					ns.exit();
-				}
+				} x++
 			}
 		}
 	}
