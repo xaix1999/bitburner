@@ -58,8 +58,21 @@ export async function main(ns) {
 	var i = 0;
 	//
 	async function pServ() {
-		for (i = 0; i < settings.maxPlayerServers - 1; i++) {
+		for (i = 0; i < settings.maxPlayerServers; i++) {
+			if (hostList.length < settings.maxPlayerServers) {
+				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
+					if (hostList.length < ns.getPurchasedServerLimit()) {
+						let hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
+						if (hostname) {
+							ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + targetRam + " GB)")
+						}
+					}
+				}
+			}
+		}
+		for (i = 0; i < settings.maxPlayerServers; i++) {
 			if (hostList.length == settings.maxPlayerServers) {
+				scanHome();
 				var z = hostList.length - 1;
 				targetRam = (Math.min(hostList[z][0] * 4, settings.maxGbRam));
 				if (ns.serverExists(hostList[z][1]) && targetRam > hostList[z][0]) {
@@ -76,24 +89,16 @@ export async function main(ns) {
 					}
 				}
 			}
-			if (hostList.length < settings.maxPlayerServers) {
-				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
-					if (hostList.length < ns.getPurchasedServerLimit()) {
-						let hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
-						if (hostname) {
-							ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + targetRam + " GB)")
-						}
-					}
-				}
-			}
 		}
 		x = 0;
-		for (i = 0; i < hostList.length; i++) {
-			if (hostList[i][0] == settings.maxGbRam) {
-				if (hostList.length == settings.maxPlayerServers && x == hostList.length - 1) {
-					ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
-					ns.exit();
-				} x++
+		for (i = 0; i < settings.maxPlayerServers; i++) {
+			if (hostList.length == settings.maxPlayerServers) {
+				if (hostList[i][0] == settings.maxGbRam) {
+					if (x == hostList.length - 1) {
+						ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
+						ns.exit();
+					} x++
+				}
 			}
 		}
 	}
