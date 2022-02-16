@@ -85,31 +85,37 @@ export async function main(ns) {
     //
     async function theBusiness() {
         for (let i = 0; i <= hostList.length - 1; i++) {
-
-            if (ns.fileExists(files[1], hostList[i][1])) { } else { await ns.scp(files[1], "home", hostList[i][1]); }
-            if (ns.fileExists(files[0], hostList[i][1])) { } else { await ns.scp(files[0], "home", hostList[i][1]); }
-            if (ns.fileExists(files[2], hostList[i][1])) { } else { await ns.scp(files[2], "home", hostList[i][1]); }
-
             for (let x = 0; x <= targetList.length - 1; x++) {
                 if (ns.serverExists(hostList[i][1])) {
-
-                    var secNum = (ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]));
-                    var caSh = (Math.trunc(ns.getServerMoneyAvailable(targetList[x][1])))
-                    var mCash = (Math.trunc(ns.getServerMaxMoney(targetList[x][1])))
-
+                    await ns.scp(files, "home", hostList[i][1]);
+                    var secNum = (ns.getServerSecurityLevel(targetList[x][1]) - (ns.getServerMinSecurityLevel(targetList[x][1]) + 5));
+                    var caSh = (Math.trunc(ns.getServerMoneyAvailable(targetList[x][1])));
+                    var mCash = (Math.trunc(ns.getServerMaxMoney(targetList[x][1]) * 0.70));
                     let freeRam; var gThreads = 0; var wThreads = 0; var hThreads = 0;
-
+                    if (Math.trunc(secNum) < 1) {
+                        if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
+                        if (Math.trunc(mCash / caSh) <= 1) {
+                            var maxThreads = Math.trunc((0.40 / ns.hackAnalyze(targetList[x][1])) / hostList.length)
+                            var ramThreads = Math.max(Math.trunc(freeRam / 1.70), 0)
+                            var hThreads = Math.min(ramThreads, maxThreads)
+                            if (hThreads < 1) { } else {
+                                if (await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) {
+                                    ns.print("[" + Date().substr(16, 8) + "] " + files[2] + "-" + hostList[i][1] + "-h" + hThreads + "-" + targetList[x][1]);
+                                }
+                            }
+                        }
+                    }
                     if (Math.trunc(mCash / caSh) > 1) {
                         if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
                         var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) * 0.70 / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / hostList.length);
                         var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
                         var gThreads = Math.min(ramThreads, maxThreads);
                         if (gThreads < 1) { } else {
-                            //if (ns.getGrowTime(targetList[x][1]) < 600000) {
-                            if (await ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1])) {
-                                ns.print("[" + Date().substr(16, 8) + "] " + files[1] + "-" + hostList[i][1] + "-g" + gThreads + "-" + targetList[x][1]);
+                            if (ns.getGrowTime(targetList[x][1]) < 600000) {
+                                if (await ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1])) {
+                                    ns.print("[" + Date().substr(16, 8) + "] " + files[1] + "-" + hostList[i][1] + "-g" + gThreads + "-" + targetList[x][1]);
+                                }
                             }
-                            //}
                         }
                     }
                     if (Math.trunc(secNum) > 0) {
@@ -118,22 +124,9 @@ export async function main(ns) {
                         var ramThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
                         var wThreads = Math.min(ramThreads, maxThreads);
                         if (wThreads < 1) { } else {
-                            //if (ns.getWeakenTime(targetList[x][1]) < 600000) {
-                            if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) {
-                                ns.print("[" + Date().substr(16, 8) + "] " + files[0] + "-" + hostList[i][1] + "-w" + wThreads + "-" + targetList[x][1]);
-                            }
-                            //}
-                        }
-                    }
-                    if (Math.trunc(secNum) == 0) {
-                        if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
-                        if (Math.trunc(mCash / caSh) == 1) {
-                            var maxThreads = Math.trunc((0.40 / ns.hackAnalyze(targetList[x][1])) / hostList.length)
-                            var ramThreads = Math.max(Math.trunc(freeRam / 1.70), 0)
-                            var hThreads = Math.min(ramThreads, maxThreads)
-                            if (hThreads < 1) { } else {
-                                if (await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) {
-                                    ns.print("[" + Date().substr(16, 8) + "] " + files[2] + "-" + hostList[i][1] + "-h" + hThreads + "-" + targetList[x][1]);
+                            if (ns.getWeakenTime(targetList[x][1]) < 600000) {
+                                if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) {
+                                    ns.print("[" + Date().substr(16, 8) + "] " + files[0] + "-" + hostList[i][1] + "-w" + wThreads + "-" + targetList[x][1]);
                                 }
                             }
                         }
