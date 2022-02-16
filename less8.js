@@ -111,11 +111,11 @@ export async function main(ns) {
                         var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
                         var gThreads = Math.min(ramThreads, maxThreads);
                         if (gThreads < 1) { } else {
-                            if (ns.getGrowTime(targetList[x][1]) < 600000) {
+                            //if (ns.getGrowTime(targetList[x][1]) < 600000) {
                                 if (await ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1])) {
                                     ns.print("[" + Date().substr(16, 8) + "] " + files[1] + "-" + hostList[i][1] + "-g" + gThreads + "-" + targetList[x][1]);
                                 }
-                            }
+                            //}
                         }
                     }
                     if (Math.trunc(secNum) > 0) {
@@ -124,11 +124,11 @@ export async function main(ns) {
                         var ramThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
                         var wThreads = Math.min(ramThreads, maxThreads);
                         if (wThreads < 1) { } else {
-                            if (ns.getWeakenTime(targetList[x][1]) < 600000) {
+                            //if (ns.getWeakenTime(targetList[x][1]) < 600000) {
                                 if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) {
                                     ns.print("[" + Date().substr(16, 8) + "] " + files[0] + "-" + hostList[i][1] + "-w" + wThreads + "-" + targetList[x][1]);
                                 }
-                            }
+                            //}
                         }
                     }
                 }
