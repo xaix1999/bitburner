@@ -8,7 +8,7 @@ Your mileage may vary. Stocks & Hacknets seem to not be as profitable as I hoped
 
 V1.4.0 compatible
 
-8plus.js - 8.00 GB - Third version of the script. It will fill up a single host before switching to another host so as to fill up the hosts with 1024+ ram. Produces odd game engine behavior.
+8plus.js - 8.00 GB - Third version of the script. It will fill up a single host before switching to another host so as to fill up the hosts with 1024+ ram.
 
 corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to commit crimes in bitnodes that have less profitable hacking.
 
