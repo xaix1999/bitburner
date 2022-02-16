@@ -136,7 +136,7 @@ export async function main(ns) {
         }
     }
     //
-    ns.tail("less8.js");
+    ns.tail("8plus.js");
     while (true) {
         await scanExes();
         await sortServers();
