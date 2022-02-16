@@ -83,8 +83,12 @@ export async function main(ns) {
         }
     }
     //
+    var i = 0;
+    //
     async function theBusiness() {
-        for (let i = 0; i <= hostList.length - 1; i++) { await ns.sleep(1);
+        if (i > hostList.length - 1) { i = 0 }
+        if (i <= hostList.length - 1) {
+        //for (let i = 0; i <= hostList.length - 1; i++) { await ns.sleep(1);
             for (let x = 0; x <= targetList.length - 1; x++) { await ns.sleep(1);
                 if (ns.serverExists(hostList[i][1])) {
                     await ns.scp(files, "home", hostList[i][1]);
@@ -95,7 +99,7 @@ export async function main(ns) {
                     if (Math.trunc(secNum) < 1) {
                         if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
                         if (Math.trunc(mCash / caSh) <= 1) {
-                            var maxThreads = Math.trunc((0.40 / ns.hackAnalyze(targetList[x][1])) / hostList.length)
+                            var maxThreads = Math.trunc((0.40 / ns.hackAnalyze(targetList[x][1])) ); // / hostList.length)
                             var ramThreads = Math.max(Math.trunc(freeRam / 1.70), 0)
                             var hThreads = Math.min(ramThreads, maxThreads)
                             if (hThreads < 1) { } else {
@@ -107,7 +111,7 @@ export async function main(ns) {
                     }
                     if (Math.trunc(mCash / caSh) > 1) {
                         if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
-                        var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) * 0.70 / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / hostList.length);
+                        var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) * 0.70 / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) ); // / hostList.length);
                         var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
                         var gThreads = Math.min(ramThreads, maxThreads);
                         if (gThreads < 1) { } else {
@@ -120,7 +124,7 @@ export async function main(ns) {
                     }
                     if (Math.trunc(secNum) > 0) {
                         if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
-                        var maxThreads = Math.ceil((ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]) + 5) / ns.weakenAnalyze(1, 1) / hostList.length);
+                        var maxThreads = Math.ceil((ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]) + 5) / ns.weakenAnalyze(1, 1) ); // / hostList.length);
                         var ramThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
                         var wThreads = Math.min(ramThreads, maxThreads);
                         if (wThreads < 1) { } else {
@@ -133,7 +137,7 @@ export async function main(ns) {
                     }
                 }
             }
-        }
+        }i++
     }
     //
     ns.tail("8plus.js");
