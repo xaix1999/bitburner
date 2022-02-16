@@ -84,8 +84,8 @@ export async function main(ns) {
     }
     //
     async function theBusiness() {
-        for (let i = 0; i <= hostList.length - 1; i++) {
-            for (let x = 0; x <= targetList.length - 1; x++) {
+        for (let i = 0; i <= hostList.length - 1; i++) { await ns.sleep(1);
+            for (let x = 0; x <= targetList.length - 1; x++) { await ns.sleep(1);
                 if (ns.serverExists(hostList[i][1])) {
                     await ns.scp(files, "home", hostList[i][1]);
                     var secNum = (ns.getServerSecurityLevel(targetList[x][1]) - (ns.getServerMinSecurityLevel(targetList[x][1]) + 5));
