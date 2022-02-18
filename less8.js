@@ -64,10 +64,10 @@ export async function main(ns) {
 					if (ns.getServerMaxMoney(sTarget) != 0 && !targetList.includes(temp) && ns.getServerRequiredHackingLevel(sTarget) <= ns.getHackingLevel()) {
 						targetList.push(temp); targetList = arraySort(targetList)
 					}
-					/*temp = [ns.getServerMaxRam(sTarget), sTarget]
+					temp = [ns.getServerMaxRam(sTarget), sTarget]
 					if (ns.getServerMaxRam(sTarget) > 2 && !hostList.includes(sTarget)) {
 						hostList.push(temp); hostList = arraySort(hostList)
-					}*/
+					}
 				}
 			}
 		}
