@@ -103,7 +103,7 @@ export async function main(ns) {
 				//
 				if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
 				//
-				if (secNum < 1 && mCash / caSh <= 1) {
+				if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20) {
 					var wSleep = ns.getWeakenTime(targetList[x][1])
 					var gSleep = ns.getGrowTime(targetList[x][1])
 					var hsleep = ns.getHackTime(targetList[x][1])
@@ -112,23 +112,23 @@ export async function main(ns) {
 					var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.trunc(freeRam / 5.20), 0);
 					var hThreads = Math.min(ramThreads, maxThreads);
-					if (hThreads < 1 || freeRam < 5.20) { } else {
+					if (hThreads < 1) { } else {
 						if (await ns.exec(files[0], hostList[i][1], hThreads, targetList[x][1], 1, Math.trunc(Math.random() * 10000)) && await ns.exec(files[1], hostList[i][1], hThreads, targetList[x][1], growSleep, Math.trunc(Math.random() * 10000)) && await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1], hackSleep, Math.trunc(Math.random() * 10000))) { }
 					}
 				}
-				if (secNum > 0) {
+				if (secNum > 0 && ns.getWeakenTime(targetList[x][1]) < 600000) {
 					var maxThreads = Math.ceil((ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1])) / ns.weakenAnalyze(1, 1) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
 					var wThreads = Math.min(ramThreads, maxThreads);
-					if (wThreads < 1 || ns.getWeakenTime(targetList[x][1]) > 600000) { } else {
+					if (wThreads < 1) { } else {
 						if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1]), 1, Math.trunc(Math.random() * 10000)) { }
 					}
 				}
-				if (mCash / caSh > 1) {
+				if (mCash / caSh > 1 && ns.getGrowTime(targetList[x][1]) < 600000) {
 					var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) * 0.70 / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
 					var gThreads = Math.min(ramThreads, maxThreads);
-					if (gThreads < 1 || ns.getGrowTime(targetList[x][1]) > 600000) { } else {
+					if (gThreads < 1) { } else {
 						if (await ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1]), 1, Math.trunc(Math.random() * 10000)) { }
 					}
 				}
