@@ -8,6 +8,8 @@ Your mileage may vary. Stocks & Hacknets seem to not be as profitable as I hoped
 
 V1.4.0 compatible
 
+8plus.js - 8.35 GB - It's Back! Started as a 1/1/1 hack/grow/weaken batch script, and was reduced to "multithreading" batches in order to stay under the 75k thread issue of my client locking up. Slight improvement over less8.
+
 corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to commit crimes in bitnodes that have less profitable hacking.
 
 doubles.js - 21.6 GB - Script used to make sure that sleeves are recovered and able to train combat stats. The hacking training seems less effective.
