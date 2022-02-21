@@ -29,3 +29,6 @@ share.js - 7.35 GB - Script used to share() hosts with faction during hacking co
 start.js - 4.90 GB - A wget for loop with a start of "less8.js".
 
 *Means scripts not written by me.
+
+
+# Obey Heaven and work righteously.
