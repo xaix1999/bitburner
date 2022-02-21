@@ -31,4 +31,4 @@ start.js - 4.90 GB - A wget for loop with a start of "less8.js".
 *Means scripts not written by me.
 
 
-# Obey Heaven and work righteously.
+`Obey Heaven and work righteously.`
