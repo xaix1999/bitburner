@@ -155,7 +155,6 @@ export async function main(ns) {
 		await sortServers();
 		await theBusiness();
 		await ns.clearLog();
-		//await ns.print(targetList);
 		if (u > danceFrame.length - 1) { u = 0 }
 		await ns.print(danceFrame[u]); u++
 		await ns.print("[" + Date().substr(16, 8) + "] less8.js income per/second - $" + format(ns.getScriptIncome("less8.js", "home")));
