@@ -38,16 +38,17 @@ export async function main(ns) {
 	ns.disableLog("sqlinject");
 	ns.disableLog("scan");
 	//
-	function scanExes() {
+	async function scanExes() {
 		var exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
 		for (let i = 0; i <= exes.length - 1; i++) { if (!ns.fileExists(exes[i] + ".exe", "home")) { exes.splice(i, 1); i-- } }
 		for (let i = 0; i <= hTarget.length - 1; i++) {
 			if (ns.serverExists(hTarget[i])) {
 				if (ns.getServerMaxMoney(hTarget[i]) > 0 || ns.getServerMaxRam(hTarget[i]) > 2) {
-					for (let x = 0; x <= exes.length - 1; x++) { ns[exes[x].toLowerCase()](hTarget[i]); }
-					if (ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
-						if (!ns.hasRootAccess(hTarget[i]) && ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) { ns.nuke(hTarget[i]); }
-
+					if (!ns.hasRootAccess(hTarget[i]) && ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
+						if (ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
+							for (let x = 0; x <= exes.length - 1; x++) { ns[exes[x].toLowerCase()](hTarget[i]); }
+							await ns.nuke(hTarget[i]);
+						}
 					}
 				}
 			}
@@ -94,7 +95,7 @@ export async function main(ns) {
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
 			if (ns.serverExists(hostList[i][1])) {
 				//
-				await ns.scp(files, "home", hostList[i][1])
+				await ns.scp(files, "home", hostList[i][1]);
 				//
 				var secNum = Math.trunc(ns.getServerSecurityLevel(targetList[x][1]) - (ns.getServerMinSecurityLevel(targetList[x][1]) + 5));
 				var caSh = Math.trunc(ns.getServerMoneyAvailable(targetList[x][1]));
@@ -104,11 +105,11 @@ export async function main(ns) {
 				if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
 				//
 				if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20) {
-					var wSleep = ns.getWeakenTime(targetList[x][1])
-					var gSleep = ns.getGrowTime(targetList[x][1])
-					var hsleep = ns.getHackTime(targetList[x][1])
-					var growSleep = Math.trunc(wSleep) - Math.trunc(gSleep) - 5
-					var hackSleep = Math.trunc(wSleep) - Math.trunc(hsleep) - 10
+					var wSleep = ns.getWeakenTime(targetList[x][1]);
+					var gSleep = ns.getGrowTime(targetList[x][1]);
+					var hsleep = ns.getHackTime(targetList[x][1]);
+					var growSleep = Math.trunc(wSleep) - Math.trunc(gSleep) - 5;
+					var hackSleep = Math.trunc(wSleep) - Math.trunc(hsleep) - 10;
 					var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.trunc(freeRam / 5.20), 0);
 					var hThreads = Math.min(ramThreads, maxThreads);
@@ -156,7 +157,7 @@ export async function main(ns) {
 		await theBusiness();
 		await ns.clearLog();
 		if (u > danceFrame.length - 1) { u = 0 }
-		await ns.print(danceFrame[u]); u++
+		await ns.print(danceFrame[u]); u++;
 		await ns.print("[" + Date().substr(16, 8) + "] 8plus.js income per/second - $" + format(ns.getScriptIncome("8plus.js", "home")));
 		await ns.sleep(1000);
 	}
