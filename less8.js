@@ -44,10 +44,11 @@ export async function main(ns) {
 		for (let i = 0; i <= hTarget.length - 1; i++) {
 			if (ns.serverExists(hTarget[i])) {
 				if (ns.getServerMaxMoney(hTarget[i]) > 0 || ns.getServerMaxRam(hTarget[i]) > 2) {
-					for (let x = 0; x <= exes.length - 1; x++) { ns[exes[x].toLowerCase()](hTarget[i]); }
-					if (ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
-						if (!ns.hasRootAccess(hTarget[i]) && ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) { await ns.nuke(hTarget[i]); }
-
+					if (!ns.hasRootAccess(hTarget[i]) && ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
+						if (ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
+							for (let x = 0; x <= exes.length - 1; x++) { ns[exes[x].toLowerCase()](hTarget[i]); }
+							await ns.nuke(hTarget[i]);
+						}
 					}
 				}
 			}
