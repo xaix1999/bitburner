@@ -6,6 +6,11 @@ export async function main(ns) {
 	async function sleeveDo() {
 		var sleeveNum = ns.sleeve.getNumSleeves();
 		for (let x = 0; x <= sleeveNum - 1; x++) {
+			if (!(ns.sleeve.getSleevePurchasableAugs(x) == [])) {
+				var sleeveAug = ns.sleeve.getSleevePurchasableAugs(x)
+				for (let y = 0; y <= sleeveAug.length - 1; y++)
+					ns.sleeve.purchaseSleeveAug(x, sleeveAug[y].name)
+			}
 			if (ns.sleeve.getSleeveStats(x).shock > 0) {
 				await ns.sleeve.setToShockRecovery(x);
 			}
@@ -16,15 +21,15 @@ export async function main(ns) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Strength");
 			}
-			if (ns.sleeve.getSleeveStats(x).strength >= 201 && ns.sleeve.getSleeveStats(x).defense < 201){
+			if (ns.sleeve.getSleeveStats(x).strength >= 201 && ns.sleeve.getSleeveStats(x).defense < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Defense");
 			}
-			if (ns.sleeve.getSleeveStats(x).defense >= 201 && ns.sleeve.getSleeveStats(x).dexterity < 201){
+			if (ns.sleeve.getSleeveStats(x).defense >= 201 && ns.sleeve.getSleeveStats(x).dexterity < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Dexterity");
 			}
-			if (ns.sleeve.getSleeveStats(x).dexterity >= 201 && ns.sleeve.getSleeveStats(x).agility < 201){
+			if (ns.sleeve.getSleeveStats(x).dexterity >= 201 && ns.sleeve.getSleeveStats(x).agility < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Agility");
 			}
