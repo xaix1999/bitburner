@@ -14,31 +14,31 @@ export async function main(ns) {
 			if (ns.sleeve.getSleeveStats(x).shock > 0) {
 				await ns.sleeve.setToShockRecovery(x);
 			}
-			if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync < 100) {
+			else if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync < 100) {
 				await ns.sleeve.setToSynchronize(x);
 			}
-			if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync == 100 && ns.sleeve.getSleeveStats(x).strength < 201) {
+			else if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync == 100 && ns.sleeve.getSleeveStats(x).strength < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Strength");
 			}
-			if (ns.sleeve.getSleeveStats(x).strength >= 201 && ns.sleeve.getSleeveStats(x).defense < 201) {
+			else if (ns.sleeve.getSleeveStats(x).strength >= 201 && ns.sleeve.getSleeveStats(x).defense < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Defense");
 			}
-			if (ns.sleeve.getSleeveStats(x).defense >= 201 && ns.sleeve.getSleeveStats(x).dexterity < 201) {
+			else if (ns.sleeve.getSleeveStats(x).defense >= 201 && ns.sleeve.getSleeveStats(x).dexterity < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Dexterity");
 			}
-			if (ns.sleeve.getSleeveStats(x).dexterity >= 201 && ns.sleeve.getSleeveStats(x).agility < 201) {
+			else if (ns.sleeve.getSleeveStats(x).dexterity >= 201 && ns.sleeve.getSleeveStats(x).agility < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
 				await ns.sleeve.setToGymWorkout(x, "Powerhouse Gym", "Train Agility");
 			}
-			if (ns.sleeve.getSleeveStats(x).agility >= 201 && ns.sleeve.getSleeveStats(x).hacking < 201) {
+			else if (ns.sleeve.getSleeveStats(x).agility >= 201 && ns.sleeve.getSleeveStats(x).hacking < 201) {
 				await ns.sleeve.travel(x, "Volhaven");
 				//await ns.sleeve.setToUniversityCourse(x, "ZB Institute of Technology", "Leadership");
 				await ns.sleeve.setToUniversityCourse(x, "ZB Institute of Technology", "Algorithms");
 			}
-			if (ns.sleeve.getSleeveStats(x).hacking >= 201 && ns.sleeve.getSleeveStats(x).strength >= 201 && ns.sleeve.getSleeveStats(x).defense >= 201 && ns.sleeve.getSleeveStats(x).dexterity >= 201 && ns.sleeve.getSleeveStats(x).agility >= 201 && !(ns.sleeve.getTask(x).crime == "Larceny")) {
+			else if (ns.sleeve.getSleeveStats(x).hacking >= 201 && ns.sleeve.getSleeveStats(x).strength >= 201 && ns.sleeve.getSleeveStats(x).defense >= 201 && ns.sleeve.getSleeveStats(x).dexterity >= 201 && ns.sleeve.getSleeveStats(x).agility >= 201 && !(ns.sleeve.getTask(x).crime == "Larceny")) {
 				await ns.sleeve.setToCommitCrime(x, "Larceny");
 
 			}
