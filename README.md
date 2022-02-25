@@ -12,7 +12,7 @@ V1.4.0 compatible
 
 corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to commit crimes in bitnodes that have less profitable hacking.
 
-doubles.js - 21.6 GB - Script used to make sure that sleeves are recovered and able to train combat stats. The hacking training seems less effective.
+doubles.js - 45.6 GB - Script used to make sure that sleeves are recovered and able to train combat stats. Currently set to do "Larceny" for the hacking exp and money.
 
 *hnet.js - 5.70 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells. Reduced ram usages by 0.4 GB.
 
