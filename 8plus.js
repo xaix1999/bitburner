@@ -3,7 +3,7 @@ export async function main(ns) {
 	var temp = false;
 	var scanAdd = false;
 	//var hTarget = []
-	var hTarget = ["n00dles", "CSEC", "global-pharm", "foodnstuff", "sigma-cosmetics", "joesguns", "hong-fang-tea", "harakiri-sushi", "iron-gym", "zer0", "nectar-net", "max-hardware", "neo-net", "phantasy", "omega-net", "silver-helix", "the-hub", "comptek", "johnson-ortho", "crush-fitness", "avmnite-02h", "netlink", "catalyst", "I.I.I.I", "rothman-uni", "zb-institute", "summit-uni", "syscore", "aevum-police", "alpha-ent", "lexo-corp", "rho-construction", "millenium-fitness", "galactic-cyber", "aerocorp", "snap-fitness", "omnia", "unitalife", "deltaone", "defcomm", "zeus-med", "icarus", "solaris", "univ-energy", "zb-def", "nova-med", "infocomm", "taiyang-digital", "titan-labs", "microdyne", "applied-energetics", "run4theh111z", "stormtech", "fulcrumtech", "helios", "vitalife", ".", "omnitek", "kuai-gong", "4sigma", "nwo", "clarkinc", "b-and-a", "blade", "powerhouse-fitness", "ecorp", "megacorp", "fulcrumassets"]
+	var hTarget = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "hong-fang-tea", "harakiri-sushi", "iron-gym", "zer0", "nectar-net", "CSEC", "max-hardware", "neo-net", "phantasy", "omega-net", "silver-helix", "the-hub", "comptek", "johnson-ortho", "crush-fitness", "avmnite-02h", "netlink", "catalyst", "I.I.I.I", "rothman-uni", "zb-institute", "summit-uni", "syscore", "aevum-police", "alpha-ent", "lexo-corp", "rho-construction", "millenium-fitness", "galactic-cyber", "aerocorp", "global-pharm", "snap-fitness", "omnia", "unitalife", "deltaone", "defcomm", "zeus-med", "icarus", "solaris", "univ-energy", "zb-def", "nova-med", "infocomm", "taiyang-digital", "titan-labs", "microdyne", "applied-energetics", "run4theh111z", "stormtech", "fulcrumtech", "helios", "vitalife", ".", "omnitek", "kuai-gong", "4sigma", "nwo", "clarkinc", "b-and-a", "blade", "powerhouse-fitness", "ecorp", "megacorp", "fulcrumassets"]
 	var hostList;
 	var targetList;
 	var files = ["weak.js", "grow.js", "hack.js"];
@@ -61,12 +61,12 @@ export async function main(ns) {
 			let sTarget = hTarget[i];
 			if (ns.serverExists(sTarget) && ns.hasRootAccess(sTarget)) {
 				if (ns.getServerMaxMoney(sTarget) > 0 || ns.getServerMaxRam(sTarget) > 2) {
-					temp = [Math.trunc(ns.getServerMaxMoney(sTarget) * 0.1 / ns.getServerMinSecurityLevel(sTarget) / (ns.getServerGrowth(sTarget) * -1 + 100) / ns.getServerRequiredHackingLevel(sTarget)), sTarget]
+					temp = [Math.trunc(ns.getServerMaxMoney(sTarget) * 0.1 / ns.getServerMinSecurityLevel(sTarget)), sTarget]
 					if (ns.getServerMaxMoney(sTarget) != 0 && !targetList.includes(temp) && ns.getServerRequiredHackingLevel(sTarget) <= ns.getHackingLevel()) {
 						targetList.push(temp); targetList = arraySort(targetList)
 					}
 					temp = [ns.getServerMaxRam(sTarget), sTarget]
-					if (ns.getServerMaxRam(sTarget) > 2 && !hostList.includes(sTarget)) {
+					if (ns.getServerMaxRam(sTarget) >= 1024 && !hostList.includes(sTarget)) {
 						hostList.push(temp); hostList = arraySort(hostList)
 					}
 				}
@@ -117,6 +117,7 @@ export async function main(ns) {
 						if (await ns.exec(files[0], hostList[i][1], hThreads, targetList[x][1], 1, Math.trunc(Math.random() * 10000)) && await ns.exec(files[1], hostList[i][1], hThreads, targetList[x][1], growSleep, Math.trunc(Math.random() * 10000)) && await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1], hackSleep, Math.trunc(Math.random() * 10000))) { }
 					}
 				}
+				//
 				if (secNum > 0 && ns.getWeakenTime(targetList[x][1]) < 600000) {
 					var maxThreads = Math.ceil((ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1])) / ns.weakenAnalyze(1, 1) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
@@ -125,6 +126,7 @@ export async function main(ns) {
 						if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1]), 1, Math.trunc(Math.random() * 10000)) { }
 					}
 				}
+				//
 				if (mCash / caSh > 1 && ns.getGrowTime(targetList[x][1]) < 600000) {
 					var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) * 0.70 / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
