@@ -7,10 +7,10 @@ export async function main(ns) {
 		var sleeveNum = ns.sleeve.getNumSleeves();
 		for (let x = 0; x <= sleeveNum - 1; x++) {
 			if (ns.sleeve.getSleeveStats(x).shock > 0) {
-				if (await ns.sleeve.setToShockRecovery(x)) { await ns.print("Sleeve #" + x + " is doing shock recovery.") }
+				await ns.sleeve.setToShockRecovery(x);
 			}
 			if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync < 100) {
-				if (await ns.sleeve.setToSynchronize(x)) { await ns.print("Sleeve #" + x + " is doing sync.") }
+				await ns.sleeve.setToSynchronize(x);
 			}
 			if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync == 100 && ns.sleeve.getSleeveStats(x).strength < 201) {
 				await ns.sleeve.travel(x, "Sector-12");
@@ -34,7 +34,7 @@ export async function main(ns) {
 				await ns.sleeve.setToUniversityCourse(x, "ZB Institute of Technology", "Algorithms");
 			}
 			if (ns.sleeve.getSleeveStats(x).hacking >= 201 && ns.sleeve.getSleeveStats(x).strength >= 201 && ns.sleeve.getSleeveStats(x).defense >= 201 && ns.sleeve.getSleeveStats(x).dexterity >= 201 && ns.sleeve.getSleeveStats(x).agility >= 201 && !(ns.sleeve.getTask(x).crime == "Larceny")) {
-				await ns.sleeve.setToCommitCrime(x, "Larceny")
+				await ns.sleeve.setToCommitCrime(x, "Larceny");
 
 			}
 		}
@@ -44,9 +44,9 @@ export async function main(ns) {
 		await ns.sleep(30000);
 		//await ns.exit();
 
-		//await ns.sleeve.setToCommitCrime(x,"Mug")
-		//await ns.sleeve.setToCommitCrime(x,"Deal Drugs")
-		//await ns.sleeve.setToCommitCrime(x,"Homicide")
+		//await ns.sleeve.setToCommitCrime(x,"Mug");
+		//await ns.sleeve.setToCommitCrime(x,"Deal Drugs");
+		//await ns.sleeve.setToCommitCrime(x,"Homicide");
 		//
 	}
 }
