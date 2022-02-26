@@ -33,4 +33,5 @@ start.js - 4.90 GB - A wget for loop with a start of "less8.js".
 
 `Obey Heaven and work righteously.`
 
-![Screenshot at 2022-02-24 20-53-24](https://user-images.githubusercontent.com/88251983/155650599-e7bace77-cd18-4c44-8791-2989d592db76.png)
+![Screenshot at 2022-02-26 15-30-35](https://user-images.githubusercontent.com/88251983/155861091-5b268e6d-8f40-404f-88a7-7fbe73054e3c.png)
+
