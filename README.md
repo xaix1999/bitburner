@@ -1,4 +1,4 @@
-# Bit burner
+# Bitburner
 **scripts used to automate hacking on all hosts
 
 These are some scripts I use to auto exec hacks to auto gen cash in this game.
