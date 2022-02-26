@@ -66,7 +66,7 @@ export async function main(ns) {
 						targetList.push(temp); targetList = arraySort(targetList)
 					}
 					temp = [ns.getServerMaxRam(sTarget), sTarget]
-					if (ns.getServerMaxRam(sTarget) >= 1024 && !hostList.includes(sTarget)) {
+					if (ns.getServerMaxRam(sTarget) >= 8192 && !hostList.includes(sTarget)) {
 						hostList.push(temp); hostList = arraySort(hostList)
 					}
 				}
@@ -105,16 +105,18 @@ export async function main(ns) {
 				if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
 				//
 				if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20) {
+					var ghUpKeep = Math.min(Math.ceil(ns.growthAnalyze(targetList[x][1], Math.ceil(ns.getServerMaxMoney(targetList[x][1]) / ns.getServerMoneyAvailable(targetList[x][1])), 1) + 1), 12)
 					var wSleep = ns.getWeakenTime(targetList[x][1]);
 					var gSleep = ns.getGrowTime(targetList[x][1]);
 					var hsleep = ns.getHackTime(targetList[x][1]);
+					var wRam = 1.75; var gRam = 1.75; var hRam = 1.70;
 					var growSleep = Math.trunc(wSleep) - Math.trunc(gSleep) - 5;
 					var hackSleep = Math.trunc(wSleep) - Math.trunc(hsleep) - 10;
 					var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
-					var ramThreads = Math.max(Math.trunc(freeRam / 5.20), 0);
+					var ramThreads = Math.max(Math.trunc(freeRam / (wRam + (gRam * ghUpKeep) + hRam)), 0);
 					var hThreads = Math.min(ramThreads, maxThreads);
 					if (hThreads < 1) { } else {
-						if (await ns.exec(files[0], hostList[i][1], hThreads, targetList[x][1], 1, Math.trunc(Math.random() * 10000)) && await ns.exec(files[1], hostList[i][1], hThreads, targetList[x][1], growSleep, Math.trunc(Math.random() * 10000)) && await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1], hackSleep, Math.trunc(Math.random() * 10000))) { }
+						if (await ns.exec(files[0], hostList[i][1], hThreads, targetList[x][1], 1, Math.trunc(Math.random() * 10000)) && await ns.exec(files[1], hostList[i][1], (hThreads * ghUpKeep), targetList[x][1], growSleep, Math.trunc(Math.random() * 10000)) && await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1], hackSleep, Math.trunc(Math.random() * 10000))) { }
 					}
 				}
 				//
