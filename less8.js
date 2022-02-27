@@ -88,7 +88,6 @@ export async function main(ns) {
 		let x = 0; let i = 0;
 		for (let y = 1; y <= hostList.length * targetList.length; y++) {
 			await ns.sleep(1);
-			let freeRam; var gThreads = 0; var wThreads = 0; var hThreads = 0;
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
 			if (ns.serverExists(hostList[i][1])) {
@@ -99,7 +98,8 @@ export async function main(ns) {
 				var caSh = Math.trunc(ns.getServerMoneyAvailable(targetList[x][1]));
 				var mCash = Math.trunc(ns.getServerMaxMoney(targetList[x][1]) * 0.70);
 				var gThreads = 0; var wThreads = 0; var hThreads = 0;
-				if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
+				//
+				if (hostList[i][1] == "home") { var freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { var freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
 				//
 				if (secNum < 1 && mCash / caSh <= 1) {
 					//var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
