@@ -90,7 +90,6 @@ export async function main(ns) {
 		var x = 0; var i = 0;
 		for (let y = 1; y <= hostList.length * targetList.length; y++) {
 			await ns.sleep(1);
-			var freeRam; var gThreads = 0; var wThreads = 0; var hThreads = 0;
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
 			if (ns.serverExists(hostList[i][1])) {
@@ -102,7 +101,7 @@ export async function main(ns) {
 				var mCash = Math.trunc(ns.getServerMaxMoney(targetList[x][1]) * 0.70);
 				var gThreads = 0; var wThreads = 0; var hThreads = 0;
 				//
-				if (hostList[i][1] == "home") { freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
+				if (hostList[i][1] == "home") { var freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { var freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
 				//
 				if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20) {
 					var ghUpKeep = Math.min(Math.ceil(ns.growthAnalyze(targetList[x][1], Math.ceil(ns.getServerMaxMoney(targetList[x][1]) / ns.getServerMoneyAvailable(targetList[x][1])), 1) + 1), 12)
