@@ -129,7 +129,7 @@ export async function main(ns) {
 				}
 				//
 				if (mCash / caSh > 1 && ns.getGrowTime(targetList[x][1]) < 600000) {
-					var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) * 0.70 / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / (hostList.length - 1));
+					var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
 					var gThreads = Math.min(ramThreads, maxThreads);
 					if (gThreads < 1) { } else {
