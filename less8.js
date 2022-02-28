@@ -94,6 +94,15 @@ export async function main(ns) {
 				//
 				await ns.scp(files, "home", hostList[i][1]);
 				//
+				if (ns.getHackingLevel() >= 1 && ns.getHackingLevel() < 40) { targetList[x][1] = "n00dles"}
+				if (ns.getHackingLevel() >= 40 && ns.getHackingLevel() < 100) { targetList[x][1] = "harakiri-sushi"}
+				if (ns.getHackingLevel() >= 100 && ns.getHackingLevel() < 150) { targetList[x][1] = "phantasy"}
+				if (ns.getHackingLevel() >= 150 && ns.getHackingLevel() < 202) { targetList[x][1] = "silver-helix"}
+				if (ns.getHackingLevel() >= 202 && ns.getHackingLevel() < 323) { targetList[x][1] = "omega-net"}
+				if (ns.getHackingLevel() >= 323 && ns.getHackingLevel() < 403) { targetList[x][1] = "the-hub"}
+				if (ns.getHackingLevel() >= 403 && ns.getHackingLevel() < 493) { targetList[x][1] = "catalyst"}
+				if (ns.getHackingLevel() >= 493 && ns.getHackingLevel() < 532) { targetList[x][1] = "rho-construction"}
+				//
 				var secNum = Math.trunc(ns.getServerSecurityLevel(targetList[x][1]) - (ns.getServerMinSecurityLevel(targetList[x][1]) + 5));
 				var caSh = Math.trunc(ns.getServerMoneyAvailable(targetList[x][1]));
 				var mCash = Math.trunc(ns.getServerMaxMoney(targetList[x][1]) * 0.70);
@@ -102,15 +111,15 @@ export async function main(ns) {
 				if (hostList[i][1] == "home") { var freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { var freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
 				//
 				if (secNum < 1 && mCash / caSh <= 1) {
-					//var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
+					var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.trunc(freeRam / 1.70), 0);
-					//var hThreads = Math.min(ramThreads, maxThreads);
-					var hThreads = Math.trunc(ramThreads);
+					var hThreads = Math.min(ramThreads, maxThreads);
+					//var hThreads = Math.trunc(ramThreads);
 					if (hThreads < 1) { } else {
 						if (await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) { }
 					}
 				}
-				if (secNum > 0 && ns.getWeakenTime(targetList[x][1]) < 600000) {
+				if (secNum > 0 /*&& ns.getWeakenTime(targetList[x][1]) < 1200000*/) {
 					var maxThreads = Math.ceil(ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]) / ns.weakenAnalyze(1, 1) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
 					var wThreads = Math.min(ramThreads, maxThreads);
@@ -119,7 +128,7 @@ export async function main(ns) {
 						if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) { }
 					}
 				}
-				if (mCash / caSh > 1 && ns.getGrowTime(targetList[x][1]) < 600000) {
+				if (mCash / caSh > 1 /*&& ns.getGrowTime(targetList[x][1]) < 1200000*/) {
 					var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / (hostList.length - 1));
 					var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
 					var gThreads = Math.min(ramThreads, maxThreads);
@@ -153,7 +162,7 @@ export async function main(ns) {
 		await ns.clearLog();
 		if (u > danceFrame.length - 1) { u = 0 }
 		await ns.print(danceFrame[u]); u++
-		await ns.print("[" + Date().substr(16, 8) + "] less8.js income per/second - $" + format(ns.getScriptIncome("less8.js", "home")));
+		//await ns.print("[" + Date().substr(16, 8) + "] less8.js income per/second - $" + format(ns.getScriptIncome("less8.js", "home")));
 		await ns.sleep(1000);
 	}
 }
