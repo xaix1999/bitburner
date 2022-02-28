@@ -97,11 +97,11 @@ export async function main(ns) {
 				if (ns.getHackingLevel() >= 1 && ns.getHackingLevel() < 40) { targetList[x][1] = "n00dles"}
 				if (ns.getHackingLevel() >= 40 && ns.getHackingLevel() < 100) { targetList[x][1] = "harakiri-sushi"}
 				if (ns.getHackingLevel() >= 100 && ns.getHackingLevel() < 150) { targetList[x][1] = "phantasy"}
-				if (ns.getHackingLevel() >= 150 && ns.getHackingLevel() < 202) { targetList[x][1] = "silver-helix"}
-				if (ns.getHackingLevel() >= 202 && ns.getHackingLevel() < 323) { targetList[x][1] = "omega-net"}
-				if (ns.getHackingLevel() >= 323 && ns.getHackingLevel() < 403) { targetList[x][1] = "the-hub"}
-				if (ns.getHackingLevel() >= 403 && ns.getHackingLevel() < 493) { targetList[x][1] = "catalyst"}
-				if (ns.getHackingLevel() >= 493 && ns.getHackingLevel() < 532) { targetList[x][1] = "rho-construction"}
+				if (ns.getHackingLevel() >= 150 && ns.getHackingLevel() < 220) { targetList[x][1] = "silver-helix"}
+				if (ns.getHackingLevel() >= 220 && ns.getHackingLevel() < 325) { targetList[x][1] = "omega-net"}
+				if (ns.getHackingLevel() >= 325 && ns.getHackingLevel() < 450) { targetList[x][1] = "the-hub"}
+				if (ns.getHackingLevel() >= 450 && ns.getHackingLevel() < 525) { targetList[x][1] = "catalyst"}
+				if (ns.getHackingLevel() >= 525 && ns.getHackingLevel() < 600) { targetList[x][1] = "rho-construction"}
 				//
 				var secNum = Math.trunc(ns.getServerSecurityLevel(targetList[x][1]) - (ns.getServerMinSecurityLevel(targetList[x][1]) + 5));
 				var caSh = Math.trunc(ns.getServerMoneyAvailable(targetList[x][1]));
