@@ -121,7 +121,7 @@ export async function main(ns) {
 					var hThreads = Math.min(ramThreads, maxThreads);
 					//var hThreads = Math.trunc(ramThreads);
 					if (hThreads < 1) { } else {
-						//if (await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) { }
+						if (await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) { }
 					}
 				}
 				if (secNum > 0 /*&& ns.getWeakenTime(targetList[x][1]) < 600000*/) {
@@ -135,7 +135,7 @@ export async function main(ns) {
 					var wThreads = Math.min(ramThreads, maxThreads);
 					//var wThreads = Math.min(ramThreads);
 					if (wThreads < 1) { } else {
-						//if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) { }
+						if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) { }
 					}
 				}
 				if (mCash / caSh > 1 /*&& ns.getGrowTime(targetList[x][1]) < 600000*/) {
