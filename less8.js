@@ -111,38 +111,38 @@ export async function main(ns) {
 				if (hostList[i][1] == "home") { var freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { var freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]) }
 				//
 				if (secNum < 1 && mCash / caSh <= 1) {
-					if (hostList[0][0] >= 256 && (hostList[0][1].startsWith("s-") || hostList[0][1].startsWith("hacknet-node-"))) {
+					if (hostList[2][0] > 256) {
 						var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
 					}
-					else if (!(hostList[0][1].startsWith("s-") || hostList[0][1].startsWith("hacknet-node-"))) {
+					else if (hostList[2][0] <= 256) {
 						var maxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]));
 					}
 					var ramThreads = Math.max(Math.trunc(freeRam / 1.70), 0);
 					var hThreads = Math.min(ramThreads, maxThreads);
 					//var hThreads = Math.trunc(ramThreads);
 					if (hThreads < 1) { } else {
-						if (await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) { }
+						//if (await ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) { }
 					}
 				}
 				if (secNum > 0 /*&& ns.getWeakenTime(targetList[x][1]) < 600000*/) {
-					if (hostList[0][0] >= 256 && (hostList[0][1].startsWith("s-") || hostList[0][1].startsWith("hacknet-node-"))) {
+					if (hostList[2][0] > 256) {
 						var maxThreads = Math.ceil(ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]) / ns.weakenAnalyze(1, 1) / (hostList.length - 1));
 					}
-					else if (!(hostList[0][1].startsWith("s-") || hostList[0][1].startsWith("hacknet-node-"))) {
+					else if (hostList[2][0] <= 256) {
 						var maxThreads = Math.ceil(ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]) / ns.weakenAnalyze(1, 1));
 					}
 					var ramThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
 					var wThreads = Math.min(ramThreads, maxThreads);
 					//var wThreads = Math.min(ramThreads);
 					if (wThreads < 1) { } else {
-						if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) { }
+						//if (await ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) { }
 					}
 				}
 				if (mCash / caSh > 1 /*&& ns.getGrowTime(targetList[x][1]) < 600000*/) {
-					if (hostList[0][0] >= 256 && (hostList[0][1].startsWith("s-") || hostList[0][1].startsWith("hacknet-node-"))) {
+					if (hostList[2][0] > 256) {
 						var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / (hostList.length - 1));
 					}
-					else if (!(hostList[0][1].startsWith("s-") || hostList[0][1].startsWith("hacknet-node-"))) {
+					else if (hostList[2][0] <= 256) {
 						var maxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1));
 					}
 					var ramThreads = Math.max(Math.floor(freeRam / 1.75), 0);
