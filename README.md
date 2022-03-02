@@ -27,6 +27,8 @@ share.js - 7.35 GB - Script used to share() hosts with faction during hacking co
 
 *shortsticky.js - 26.70 GB - Stock manager requiring tix and api access.
 
+show.js - 2.45 GB - Debug tool used to show the current status of the target list.
+
 *sinewave.js - 23.70 GB - Stock manger with no requirements.
 
 start.js - 4.90 GB - A wget for loop with a start of "less8.js".
