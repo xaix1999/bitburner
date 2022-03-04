@@ -8,6 +8,7 @@ const filesToDownload = [
 	"pserv.js",
 	"share.js",
 	"shortsticky.js",
+	"show.js",
 	"sinewave.js"
 ]
 
