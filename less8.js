@@ -2,7 +2,6 @@
 export async function main(ns) {
 	var temp = false;
 	var scanAdd = false;
-	var hTarget7 = ["n00dles", "harakiri-sushi", "phantasy", "silver-helix", "omega-net", "the-hub", "catalyst", "rho-construction"]
 	var hTarget = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "hong-fang-tea", "harakiri-sushi", "iron-gym", "zer0", "nectar-net", "CSEC", "max-hardware", "neo-net", "phantasy", "omega-net", "silver-helix", "the-hub", "comptek", "johnson-ortho", "crush-fitness", "avmnite-02h", "netlink", "catalyst", "I.I.I.I", "rothman-uni", "zb-institute", "summit-uni", "syscore", "aevum-police", "alpha-ent", "lexo-corp", "rho-construction", "millenium-fitness", "galactic-cyber", "aerocorp", "global-pharm", "snap-fitness", "omnia", "unitalife", "deltaone", "defcomm", "zeus-med", "icarus", "solaris", "univ-energy", "zb-def", "nova-med", "infocomm", "taiyang-digital", "titan-labs", "microdyne", "applied-energetics", "run4theh111z", "stormtech", "fulcrumtech", "helios", "vitalife", ".", "omnitek", "kuai-gong", "4sigma", "nwo", "clarkinc", "b-and-a", "blade", "powerhouse-fitness", "ecorp", "megacorp", "fulcrumassets"]
 	var hostList;
 	var targetList;
@@ -36,8 +35,7 @@ export async function main(ns) {
 	async function sortServers() {
 		targetList = []; hostList = [[ns.getServerMaxRam("home"), "home"]];
 		for (let i = 0; i <= hTarget.length - 1; i++) {
-			if (ns.getHackingLevel() < 220) { var sTarget = hTarget7[i]; }
-			if (ns.getHackingLevel() >= 220) { var sTarget = hTarget[i]; }
+			let sTarget = hTarget[i];
 			if (ns.serverExists(sTarget) && ns.hasRootAccess(sTarget)) {
 				if (ns.getServerMaxMoney(sTarget) > 0 || ns.getServerMaxRam(sTarget) > 2) {
 					temp = [Math.trunc(ns.getServerMaxMoney(sTarget) * 0.1 / ns.getServerMinSecurityLevel(sTarget)), sTarget]
