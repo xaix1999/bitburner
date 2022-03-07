@@ -1,14 +1,16 @@
 /** @param {NS} ns **/
 const baseUrl = "https://raw.githubusercontent.com/xaix1999/bitburner/main/"
 const filesToDownload = [
+	"8pW.js",
+	"8plus.js",
 	"corrupt.js",
 	"doubles.js",
 	"hnet.js",
 	"less8.js",
+	"less8W.js",
 	"pserv.js",
 	"share.js",
 	"shortsticky.js",
-	"show.js",
 	"sinewave.js"
 ]
 
