@@ -2,6 +2,7 @@
 export async function main(ns) {
 	var files = ["weak.js", "grow.js", "hack.js"];
 	var hostList = ns.args[0]; var targetList = ns.args[1];
+	var hostListsS = sessionStorage.hostList.split(",");
 	//
 	var freeRam = ns.getServerMaxRam(hostList) - ns.getServerUsedRam(hostList);
 	//
@@ -18,15 +19,15 @@ export async function main(ns) {
 	var growSleep = Math.trunc(wSleep) - Math.trunc(gSleep) - 5;
 	var hackSleep = Math.trunc(wSleep) - Math.trunc(hsleep) - 10;
 	//
-	var hMaxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList) / (sessionStorage.hostList.length - 1));
+	var hMaxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList) / (hostListsS.length - 1));
 	var hRamThreads = Math.max(Math.trunc((freeRam - wRam) / (wRam + (gRam * ghUpKeep) + hRam)), 0);
 	var hThreads = Math.min(hRamThreads, hMaxThreads);
 	//
-	var wMaxThreads = Math.ceil((ns.getServerSecurityLevel(targetList) - ns.getServerMinSecurityLevel(targetList)) / ns.weakenAnalyze(1, 1) / (sessionStorage.hostList.length - 1));
+	var wMaxThreads = Math.ceil((ns.getServerSecurityLevel(targetList) - ns.getServerMinSecurityLevel(targetList)) / ns.weakenAnalyze(1, 1) / (hostListsS.length - 1));
 	var wRamThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
 	var wThreads = Math.min(wRamThreads, wMaxThreads);
 	//
-	var gMaxThreads = Math.ceil(ns.growthAnalyze(targetList, ns.getServerMaxMoney(targetList) / Math.max(ns.getServerMoneyAvailable(targetList), 1), 1) / (sessionStorage.hostList.length - 1));
+	var gMaxThreads = Math.ceil(ns.growthAnalyze(targetList, ns.getServerMaxMoney(targetList) / Math.max(ns.getServerMoneyAvailable(targetList), 1), 1) / (hostListsS.length - 1));
 	var gRamThreads = Math.max(Math.floor(freeRam / 1.75), 0);
 	var gThreads = Math.min(gRamThreads, gMaxThreads);
 	//
