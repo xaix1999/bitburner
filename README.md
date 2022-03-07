@@ -21,7 +21,9 @@ doubles.js - 45.6 GB - Script used to make sure that sleeves are recovered and a
 
 *hnet.js - 5.70 GB - Set at buying 5 upgrades per cycle/chance (when the money is available), also added hash sells. Reduced ram usages by 0.4 GB.
 
-less8.js - 8.00 GB - Rewrite of previous hack script to use less than 8 GB for fresh new runs. It will pickup player owned servers as long as the name is similiar to the pserv.js format, or more exactly, starts with "s-" or "hacknet-node-".
+less8.js - 4.75 GB - Rewrite of previous hack script to use less than 8 GB for fresh new runs. It will pickup player owned servers as long as the name is similiar to the pserv.js format, or more exactly, starts with "s-" or "hacknet-node-". Backported 8plus changes to less8.
+
+less8W.js - 6.45 GB - Worker script for most of the computation needed to run less8. Has an odd behavior of not costing any ram while less8 is running. Threaded performance increase.
 
 pserv.js - 7.40 GB - Rewritten to reduce GB. Updated for BitNodes with reduced max ram amounts.
 
