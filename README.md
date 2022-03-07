@@ -11,7 +11,9 @@ Your mileage may vary. Stocks & Hacknets seem to not be as profitable as I hoped
 
 V1.4.0 compatible
 
-8plus.js - 8.15 GB - It's Back! Started as a 1/1/1 hack/grow/weaken batch script, and was reduced to "multithreading" batches in order to stay under the 75k thread issue of my client locking up. "Improvement" over less8. Less8.js is a type of stepping stone until you are able to have 1024+ GB servers available to you, which is a requirement for 8plus.js to function correctly, lower than 1024 GB of ram will have reduced performance.
+8pW.js - 6.55 GB - Worker script for most of the computation needed to run 8plus. Has an odd behavior of not costing any ram while 8plus is running. Threaded performance increase.
+
+8plus.js - 4.75 GB - It's Back! Started as a 1/1/1 hack/grow/weaken batch script, and was reduced to "multithreading" batches in order to stay under the 75k thread issue of my client locking up. "Improvement" over less8. Less8.js is a type of stepping stone until you are able to have 1024+ GB servers available to you, which is a requirement for 8plus.js to function correctly, lower than 1024 GB of ram will have reduced performance.
 
 corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to commit crimes in bitnodes that have less profitable hacking.
 
@@ -26,8 +28,6 @@ pserv.js - 7.40 GB - Rewritten to reduce GB. Updated for BitNodes with reduced m
 share.js - 7.35 GB - Script used to share() hosts with faction during hacking contracts (faction rep building).
 
 *shortsticky.js - 26.70 GB - Stock manager requiring tix and api access.
-
-show.js - 2.45 GB - Debug tool used to show the current status of the target list.
 
 *sinewave.js - 23.70 GB - Stock manger with no requirements.
 
