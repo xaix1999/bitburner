@@ -23,8 +23,6 @@ doubles.js - 45.6 GB - Script used to make sure that sleeves are recovered and a
 
 less8.js - 8.00 GB - Rewrite of previous hack script to use less than 8 GB for fresh new runs. It will pickup player owned servers as long as the name is similiar to the pserv.js format, or more exactly, starts with "s-" or "hacknet-node-".
 
-less8W.js - 6.45 GB - Worker script for most of the computation needed to run less8.
-
 pserv.js - 7.40 GB - Rewritten to reduce GB. Updated for BitNodes with reduced max ram amounts.
 
 share.js - 7.35 GB - Script used to share() hosts with faction during hacking contracts (faction rep building).
