@@ -17,7 +17,7 @@ export async function main(ns) {
 	ns.clearLog();
 	ns.disableLog("ALL");
 	//
-	function scanExes() {
+	async function scanExes() {
 		var exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
 		for (let i = 0; i <= exes.length - 1; i++) { if (!ns.fileExists(exes[i] + ".exe", "home")) { exes.splice(i, 1); i-- } }
 		for (let i = 0; i <= hTarget.length - 1; i++) {
@@ -25,17 +25,17 @@ export async function main(ns) {
 				if (ns.getServerMaxMoney(hTarget[i]) > 0 || ns.getServerMaxRam(hTarget[i]) > 2) {
 					if (!ns.hasRootAccess(hTarget[i]) && ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
 						for (let x = 0; x <= exes.length - 1; x++) { ns[exes[x].toLowerCase()](hTarget[i]); }
-						ns.nuke(hTarget[i]);
+						await ns.nuke(hTarget[i]);
 					}
 				}
 			}
 		}
 	}
 	//
-	function sortServers() {
+	async function sortServers() {
 		targetList = []; hostList = [];
 		for (let i = 0; i <= hTarget.length - 1; i++) {
-			var sTarget = hTarget[i];
+			let sTarget = hTarget[i];
 			if (ns.serverExists(sTarget) && ns.hasRootAccess(sTarget)) {
 				if (ns.getServerMaxMoney(sTarget) > 0 || ns.getServerMaxRam(sTarget) > 2) {
 					temp = [Math.trunc(ns.getServerMaxMoney(sTarget) * 0.1 / ns.getServerMinSecurityLevel(sTarget)), sTarget]
@@ -63,49 +63,64 @@ export async function main(ns) {
 		}
 	}
 	//
-	function stuTH() {
-		var targetString = [];
-		var tLS = targetList.length
-		if (tLS > 9) { tLS = 9 }
-		for (let b = 0; b < tLS; b++) {
-			if (ns.serverExists(targetList[b][1])) {
-				temp = [targetList[b][1]];
-				targetString.push(temp)
-			}
-		}
-		sessionStorage.targetList = targetString
-		var hostString = [];
-		var hoTT = hostList.length
-		for (let b = 0; b < hoTT; b++) {
-			if (ns.serverExists(hostList[b][1])) {
-				temp = [hostList[b][1]];
-				hostString.push(temp)
-			}
-		}
-		sessionStorage.hostList = hostString
-	}
-	//
 	async function theBusiness() {
-		let x = 0; let i = 0; var hostList = sessionStorage.hostList.split(","); var targetList = sessionStorage.targetList.split(",");
+		let x = 0; let i = 0;
 		for (let y = 1; y <= hostList.length * targetList.length; y++) {
 			await ns.sleep(1);
 			//
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
-			if (ns.serverExists(hostList[i])) {
+			if (ns.serverExists(hostList[i][1])) {
 				//
-				await ns.scp(files, "home", hostList[i]);
+				await ns.scp(files, "home", hostList[i][1]);
 				//
-				ns.exec("less8W.js", "home", 1, hostList[i], targetList[x]);
+				var secNum = Math.trunc(ns.getServerSecurityLevel(targetList[x][1]) - (ns.getServerMinSecurityLevel(targetList[x][1]) + 5));
+				var caSh = Math.trunc(ns.getServerMoneyAvailable(targetList[x][1]));
+				var mCash = Math.trunc(ns.getServerMaxMoney(targetList[x][1]) * 0.70);
+				//
+				if (ns.getHackingLevel() >= 220) {
+					var hMaxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]) / (hostList.length - 1));
+					var wMaxThreads = Math.ceil(ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]) / ns.weakenAnalyze(1, 1) / (hostList.length - 1));
+					var gMaxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1) / (hostList.length - 1));
+				}
+				else if (ns.getHackingLevel() < 220) {
+					var hMaxThreads = Math.ceil(0.70 / ns.hackAnalyze(targetList[x][1]));
+					var wMaxThreads = Math.ceil(ns.getServerSecurityLevel(targetList[x][1]) - ns.getServerMinSecurityLevel(targetList[x][1]) / ns.weakenAnalyze(1, 1));
+					var gMaxThreads = Math.ceil(ns.growthAnalyze(targetList[x][1], ns.getServerMaxMoney(targetList[x][1]) / Math.max(ns.getServerMoneyAvailable(targetList[x][1]), 1), 1));
+				}
+				if (hostList[i][1] == "home" && hostList[i][0] <= 256) { var freeRam = 0; } else if (ns.serverExists(hostList[i][1])) { var freeRam = ns.getServerMaxRam(hostList[i][1]) - ns.getServerUsedRam(hostList[i][1]); }
+				//
+				var hRamThreads = Math.max(Math.trunc(freeRam / 1.70), 0);
+				var hThreads = Math.min(hRamThreads, hMaxThreads);
+				var wRamThreads = Math.max(Math.trunc(freeRam / 1.75), 0);
+				var wThreads = Math.min(wRamThreads, wMaxThreads);
+				var gRamThreads = Math.max(Math.floor(freeRam / 1.75), 0);
+				var gThreads = Math.min(gRamThreads, gMaxThreads);
+				//
+				if (secNum < 1 && mCash / caSh <= 1) {
+					if (hThreads < 1) { } else {
+						if (ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) { }
+					}
+				}
+				if (secNum > 0) {
+					if (wThreads < 1) { } else {
+						if (ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) { }
+					}
+				}
+				if (mCash / caSh > 1) {
+					if (gThreads < 1) { } else {
+						if (ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1])) { }
+					}
+				}
 			} x++
 		}
 	}
 	//
 	while (true) {
-		scanExes();
-		sortServers();
-		stuTH();
+		await scanExes();
+		await sortServers();
 		await theBusiness();
+		await ns.clearLog();
 		await ns.sleep(1000);
 	}
 }
