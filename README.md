@@ -9,7 +9,7 @@ There are scripts from others that I have modified in order to "better" run in m
 Scripts have been updated to run on all bit nodes (maybe).
 Your mileage may vary. Stocks & Hacknets seem to not be as profitable as I hoped.
 
-V1.4.0 compatible
+V1.5.0 compatible
 
 8plus.js - 8.15 GB - It's Back! Started as a 1/1/1 hack/grow/weaken batch script, and was reduced to "multithreading" batches in order to stay under the 75k thread issue of my client locking up. "Improvement" over less8. Less8.js is a type of stepping stone until you are able to have 1024+ GB servers available to you, which is a requirement for 8plus.js to function correctly, lower than 1024 GB of ram will have reduced performance.
 
