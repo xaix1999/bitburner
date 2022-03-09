@@ -9,9 +9,9 @@ There are scripts from others that I have modified in order to "better" run in m
 Scripts have been updated to run on all bit nodes (maybe).
 Your mileage may vary. Stocks & Hacknets seem to not be as profitable as I hoped.
 
-V1.4.0 compatible
+V1.5.0 compatible
 
-8pW.js - 6.55 GB - Worker script for most of the computation needed to run 8plus. Has an odd behavior of not costing any ram while 8plus is running. Threaded performance increase.
+8pW.js - 6.55 GB - Worker script for most of the computation needed to run 8plus.
 
 8plus.js - 4.75 GB - It's Back! Started as a 1/1/1 hack/grow/weaken batch script, and was reduced to "multithreading" batches in order to stay under the 75k thread issue of my client locking up. "Improvement" over less8. Less8.js is a type of stepping stone until you are able to have 1024+ GB servers available to you, which is a requirement for 8plus.js to function correctly, lower than 1024 GB of ram will have reduced performance.
 
@@ -23,7 +23,7 @@ doubles.js - 45.6 GB - Script used to make sure that sleeves are recovered and a
 
 less8.js - 4.75 GB - Rewrite of previous hack script to use less than 8 GB for fresh new runs. It will pickup player owned servers as long as the name is similiar to the pserv.js format, or more exactly, starts with "s-" or "hacknet-node-". Backported 8plus changes to less8.
 
-less8W.js - 6.45 GB - Worker script for most of the computation needed to run less8. Has an odd behavior of not costing any ram while less8 is running. Threaded performance increase.
+less8W.js - 6.45 GB - Worker script for most of the computation needed to run less8.
 
 pserv.js - 7.40 GB - Rewritten to reduce GB. Updated for BitNodes with reduced max ram amounts.
 
