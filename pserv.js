@@ -7,18 +7,6 @@ export async function main(ns) {
 		totalMoneyAllocation: 0.5
 	}
 	//
-	var dateTime = "[" + Date().substr(16, 8) + "]"
-	//
-	function createUUID() {
-		var dt = new Date().getTime()
-		var uuid = 'xxyxxx'.replace(/[xy]/g, function (c) {
-			var r = (dt + Math.random() * 16) % 16 | 0
-			dt = Math.floor(dt / 16)
-			return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16)
-		})
-		return uuid
-	}
-	//
 	function arraySort(array) { return array.sort(function (a, b) { return b[0] - a[0] }) }
 	//
 	var hostList = false;
@@ -41,7 +29,7 @@ export async function main(ns) {
 		}
 	}
 	//
-	ns.tail("pserv.js")
+	//ns.tail("pserv.js")
 	ns.disableLog("disableLog");
 	ns.disableLog("sleep");
 	ns.disableLog("getServerMoneyAvailable");
@@ -62,7 +50,7 @@ export async function main(ns) {
 			if (hostList.length < settings.maxPlayerServers) {
 				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
 					if (hostList.length < ns.getPurchasedServerLimit()) {
-						let hostname = ns.purchaseServer("s-" + targetRam + "-" + createUUID(), targetRam)
+						let hostname = ns.purchaseServer("s-" + targetRam + "-" + crypto.randomUUID().substr(0,6), targetRam)
 						if (hostname) {
 							ns.print("[" + Date().substr(16, 8) + "] Bought new server: " + hostname + " (" + targetRam + " GB)")
 						}
@@ -81,7 +69,7 @@ export async function main(ns) {
 						await ns.sleep(1)
 						const serverDeleted = await ns.deleteServer(hostList[z][1])
 						if (serverDeleted) {
-							let hostname = await ns.purchaseServer("s-" + Math.min(targetRam, settings.maxGbRam) + "-" + createUUID(), Math.min(targetRam, settings.maxGbRam))
+							let hostname = await ns.purchaseServer("s-" + Math.min(targetRam, settings.maxGbRam) + "-" + crypto.randomUUID().substr(0,6), Math.min(targetRam, settings.maxGbRam))
 							if (hostname) {
 								ns.print("[" + Date().substr(16, 8) + "] Upgraded: " + hostList[z][1] + " into server: " + hostname + " " + targetRam + " GB)")
 							}
