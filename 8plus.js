@@ -32,7 +32,7 @@ export async function main(ns) {
 		}
 	}
 	//
-	function sortServers() {
+	async function sortServers() {
 		targetList = []; hostList = [];
 		for (let i = 0; i <= hTarget.length - 1; i++) {
 			let sTarget = hTarget[i];
@@ -45,6 +45,7 @@ export async function main(ns) {
 					temp = [ns.getServerMaxRam(sTarget), sTarget]
 					if (ns.getServerMaxRam(sTarget) >= 8192 && !hostList.includes(sTarget)) {
 						hostList.push(temp); hostList = arraySort(hostList)
+						await ns.scp(files, "home", sTarget);
 					}
 				}
 			}
@@ -57,6 +58,7 @@ export async function main(ns) {
 					temp = [ns.getServerMaxRam(sTarget), sTarget]
 					if (ns.getServerMaxRam(sTarget) > 2 && !hostList.includes(sTarget)) {
 						hostList.push(temp); hostList = arraySort(hostList)
+						await ns.scp(files, "home", sTarget);
 					}
 				}
 			}
@@ -69,7 +71,9 @@ export async function main(ns) {
 		for (let b = 0; b < tLS; b++) {
 			if (ns.serverExists(targetList[b][1])) {
 				temp = [targetList[b][1]];
-				targetString.push(temp)
+				if (!targetString.includes(temp)) {
+					targetString.push(temp)
+				}
 			}
 		}
 		sessionStorage.targetList = targetString
@@ -78,7 +82,9 @@ export async function main(ns) {
 		for (let b = 0; b < hoTT; b++) {
 			if (ns.serverExists(hostList[b][1])) {
 				temp = [hostList[b][1]];
-				hostString.push(temp)
+				if (!hostString.includes(temp)) {
+					hostString.push(temp)
+				}
 			}
 		}
 		sessionStorage.hostList = hostString
@@ -87,15 +93,12 @@ export async function main(ns) {
 	async function theBusiness() {
 		var x = 0; var i = 0; var hostList = sessionStorage.hostList.split(","); var targetList = sessionStorage.targetList.split(",");
 		for (let y = 1; y <= hostList.length * targetList.length; y++) {
-			await ns.sleep(10);
+			//
+			await ns.sleep(1);
 			//
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
 			if (ns.serverExists(hostList[i])) {
-				//
-				if (!ns.fileExists(files[0])) { await ns.scp(files[0], "home", hostList[i]); }
-				if (!ns.fileExists(files[1])) { await ns.scp(files[1], "home", hostList[i]); }
-				if (!ns.fileExists(files[2])) { await ns.scp(files[2], "home", hostList[i]); }
 				//
 				ns.exec("8pW.js", "home", 1, hostList[i], targetList[x]);
 			} x++
@@ -103,10 +106,10 @@ export async function main(ns) {
 	}
 	//
 	while (true) {
-		scanExes();
-		sortServers();
-		stuTH();
+		await scanExes();
+		await sortServers();
+		await stuTH();
 		await theBusiness();
-		//await ns.sleep(1000);
+		await ns.sleep(100);
 	}
 }
