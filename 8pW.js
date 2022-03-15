@@ -32,14 +32,14 @@ export async function main(ns) {
 	var gThreads = Math.min(gRamThreads, gMaxThreads);
 	//
 	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20) {
-		if (hThreads < 1) { } else if (hThreads >= 1) { ns.exec(files[0], hostList, hThreads + 1, targetList, 1, Math.trunc(Math.random() * 10000)) && ns.exec(files[1], hostList, (hThreads * ghUpKeep), targetList, growSleep, Math.trunc(Math.random() * 10000)) && ns.exec(files[2], hostList, hThreads, targetList, hackSleep, Math.trunc(Math.random() * 10000)) }
+		if (hThreads < 1) { } else if (hThreads >= 1) { ns.exec(files[0], hostList, hThreads + 1, targetList, 1, crypto.randomUUID().substr(0,6)) && ns.exec(files[1], hostList, (hThreads * ghUpKeep), targetList, growSleep, crypto.randomUUID().substr(0,6)) && ns.exec(files[2], hostList, hThreads, targetList, hackSleep, crypto.randomUUID().substr(0,6)) }
 	}
 	//
 	if (secNum > 0) {
-		if (wThreads < 1) { } else if (wThreads >= 1) { ns.exec(files[0], hostList, wThreads, targetList), 1, Math.trunc(Math.random() * 10000) }
+		if (wThreads < 1) { } else if (wThreads >= 1) { ns.exec(files[0], hostList, wThreads, targetList), 1, crypto.randomUUID().substr(0,6) }
 	}
 	//
 	if (mCash / caSh > 1) {
-		if (gThreads < 1) { } else if (gThreads >= 1) { ns.exec(files[1], hostList, gThreads, targetList), 1, Math.trunc(Math.random() * 10000) }
+		if (gThreads < 1) { } else if (gThreads >= 1) { ns.exec(files[1], hostList, gThreads, targetList), 1, crypto.randomUUID().substr(0,6) }
 	}
 }
