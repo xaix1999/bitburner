@@ -31,7 +31,7 @@ export async function main(ns) {
 		var wRamThreads = Math.max(Math.trunc(freeRam / wRam), 0);
 		var wThreads = Math.min(wRamThreads, wMaxThreads);
 		//
-		if (wThreads < 1) { } else if (wThreads >= 1) { await ns.exec(files[0], hostList, wThreads, targetList, 1, crypto.randomUUID().substr(0, 6)) }
+		if (wThreads < 1) { } else if (wThreads >= 1) { await ns.exec(files[0], hostList, wThreads, targetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
 	}
 	//
 	if (mCash / caSh > 1) {
@@ -40,6 +40,6 @@ export async function main(ns) {
 		var gRamThreads = Math.max(Math.floor(freeRam / gRam), 0);
 		var gThreads = Math.min(gRamThreads, gMaxThreads);
 		//
-		if (gThreads < 1) { } else if (gThreads >= 1) { await ns.exec(files[1], hostList, gThreads, targetList, 1, crypto.randomUUID().substr(0, 6)) }
+		if (gThreads < 1) { } else if (gThreads >= 1) { await ns.exec(files[1], hostList, gThreads, targetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
 	}
 }
