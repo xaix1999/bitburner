@@ -45,6 +45,7 @@ export async function main(ns) {
 					temp = [ns.getServerMaxRam(sTarget), sTarget]
 					if (ns.getServerMaxRam(sTarget) > 2 && !hostList.includes(sTarget)) {
 						hostList.push(temp); hostList = arraySort(hostList)
+						await ns.scp(files, "home", sTarget);
 					}
 				}
 			}
@@ -57,6 +58,7 @@ export async function main(ns) {
 					temp = [ns.getServerMaxRam(sTarget), sTarget]
 					if (ns.getServerMaxRam(sTarget) > 2 && !hostList.includes(sTarget)) {
 						hostList.push(temp); hostList = arraySort(hostList)
+						await ns.scp(files, "home", sTarget);
 					}
 				}
 			}
@@ -67,12 +69,9 @@ export async function main(ns) {
 		let x = 0; let i = 0;
 		for (let y = 1; y <= hostList.length * targetList.length; y++) {
 			await ns.sleep(1);
-			//
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
 			if (ns.serverExists(hostList[i][1])) {
-				//
-				await ns.scp(files, "home", hostList[i][1]);
 				//
 				var secNum = Math.trunc(ns.getServerSecurityLevel(targetList[x][1]) - (ns.getServerMinSecurityLevel(targetList[x][1]) + 5));
 				var caSh = Math.trunc(ns.getServerMoneyAvailable(targetList[x][1]));
@@ -98,19 +97,13 @@ export async function main(ns) {
 				var gThreads = Math.min(gRamThreads, gMaxThreads);
 				//
 				if (secNum < 1 && mCash / caSh <= 1) {
-					if (hThreads < 1) { } else {
-						if (ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1])) { }
-					}
+					if (hThreads >= 1) { ns.exec(files[2], hostList[i][1], hThreads, targetList[x][1]) }
 				}
 				if (secNum > 0) {
-					if (wThreads < 1) { } else {
-						if (ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1])) { }
-					}
+					if (wThreads >= 1) { ns.exec(files[0], hostList[i][1], wThreads, targetList[x][1]) }
 				}
 				if (mCash / caSh > 1) {
-					if (gThreads < 1) { } else {
-						if (ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1])) { }
-					}
+					if (gThreads >= 1) { ns.exec(files[1], hostList[i][1], gThreads, targetList[x][1]) }
 				}
 			} x++
 		}
@@ -120,7 +113,6 @@ export async function main(ns) {
 		await scanExes();
 		await sortServers();
 		await theBusiness();
-		await ns.clearLog();
 		await ns.sleep(1000);
 	}
 }
