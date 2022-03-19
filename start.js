@@ -7,7 +7,6 @@ const filesToDownload = [
 	"doubles.js",
 	"hnet.js",
 	"less8.js",
-	"less8W.js",
 	"pserv.js",
 	"share.js",
 	"shortsticky.js",
