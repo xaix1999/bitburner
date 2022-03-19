@@ -17,7 +17,7 @@ export async function main(ns) {
 	ns.clearLog();
 	ns.disableLog("ALL");
 	//
-	function scanExes() {
+	async function scanExes() {
 		var exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
 		for (let i = 0; i <= exes.length - 1; i++) { if (!ns.fileExists(exes[i] + ".exe", "home")) { exes.splice(i, 1); i-- } }
 		for (let i = 0; i <= hTarget.length - 1; i++) {
@@ -25,7 +25,7 @@ export async function main(ns) {
 				if (ns.getServerMaxMoney(hTarget[i]) > 0 || ns.getServerMaxRam(hTarget[i]) > 2) {
 					if (!ns.hasRootAccess(hTarget[i]) && ns.getServerNumPortsRequired(hTarget[i]) <= exes.length) {
 						for (let x = 0; x <= exes.length - 1; x++) { ns[exes[x].toLowerCase()](hTarget[i]); }
-						ns.nuke(hTarget[i]);
+						await ns.nuke(hTarget[i]);
 					}
 				}
 			}
@@ -65,7 +65,7 @@ export async function main(ns) {
 		}
 	}
 	//
-	function stuTH() {
+	async function stuTH() {
 		var targetString = [];
 		var tLS = targetList.length
 		for (let b = 0; b < tLS; b++) {
@@ -100,7 +100,7 @@ export async function main(ns) {
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
 			if (ns.serverExists(hostList[i])) {
 				//
-				ns.exec("8pW.js", "home", 1, hostList[i], targetList[x]);
+				await ns.exec("8pW.js", "home", 1, hostList[i], targetList[x]);
 			} x++
 		}
 	}
@@ -110,6 +110,6 @@ export async function main(ns) {
 		await sortServers();
 		await stuTH();
 		await theBusiness();
-		await ns.sleep(100);
+		await ns.sleep(1000);
 	}
 }
