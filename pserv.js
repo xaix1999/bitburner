@@ -2,7 +2,7 @@
 export async function main(ns) {
 	const settings = {
 		maxPlayerServers: ns.getPurchasedServerLimit(),
-		maxGbRam: ns.getPurchasedServerMaxRam(),
+		maxGbRam: Math.pow(2,18), //ns.getPurchasedServerMaxRam(),
 		minGbRam: 64,
 		totalMoneyAllocation: 0.5
 	}
