@@ -26,10 +26,8 @@ async function magicHack(ns, cHost, cTarget) {
 	const _ns = (...args) => funcRoute(ns, ...args);
 	//
 	var files = ["weak.js", "grow.js", "hack.js"];
-	//var cHost = ns.args[0].toString(); var cTarget = ns.args[1].toString();
 	var hostList = decrypt(sessionStorage.cryptKey, cHost);
 	var targetList = decrypt(sessionStorage.cryptKey, cTarget);
-	//var hostList = ns.args[0]; var targetList = ns.args[1];
 	var ddtargetList = crypt(sessionStorage.cryptKey, targetList)
 	var hostListsS = sessionStorage.hostList.split(",");
 	//
