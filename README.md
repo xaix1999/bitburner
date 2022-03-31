@@ -17,7 +17,7 @@ V1.5.0 compatible
 
 corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to commit crimes in bitnodes that have less profitable hacking.
 
-cryptInit.js - 0.00 GB - Library file used for scrambling arguments, since everytime I have seen abnomalist files on a system, It did not tell you what it was doing. So a little roleplaying is added to the "hacking".
+cryptInit.js - 0.00 GB - Library file used for scrambling arguments, since everytime I have seen anomaly files on a system, It did not tell you what it was doing. So a little roleplaying is added to the "hacking".
 
 doubles.js - 45.6 GB - Script used to make sure that sleeves are recovered and able to train combat stats. Currently set to do "Larceny" for the hacking exp and money.
 
