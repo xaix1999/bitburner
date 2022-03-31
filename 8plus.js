@@ -1,7 +1,6 @@
 /** @param {NS} ns **/
 import { magicHack } from "8pW.js"
 import { crypt, decrypt } from "/cryptInit.js";
-import { scp } from "/sCp.js"
 //
 if (sessionStorage.cryptKey == null) {
 	const cryptKey = crypto.randomUUID().substr(24)
@@ -148,7 +147,7 @@ export async function main(ns) {
 		await scanExes();
 		await sortServers();
 		await stuTH();
-		await scp(ns);
+		await _ns("exec", "sCp.js", "home", 1); //await scp(ns);
 		await theBusiness(ns);
 		await _ns("asleep", 1000);
 	}
