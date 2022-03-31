@@ -9,7 +9,7 @@ There are scripts from others that I have modified in order to "better" run in m
 Scripts have been updated to run on all bit nodes (maybe).
 Your mileage may vary.
 
-V1.5.0 compatible
+V1.6.0 compatible
 
 8pW.js - 0.00 GB - Worker script for most of the computation needed to run 8plus.
 
