@@ -131,7 +131,7 @@ export async function main(ns) {
 		var x = 0; var i = 0; var hostList = sessionStorage.hostList.split(","); var targetList = sessionStorage.targetList.split(",");
 		for (let y = 1; y <= hostList.length * targetList.length; y++) {
 			//
-			await _ns("sleep", 1);
+			await _ns("asleep", 1);
 			//
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
@@ -150,6 +150,6 @@ export async function main(ns) {
 		await stuTH();
 		await scp(ns);
 		await theBusiness(ns);
-		await _ns("sleep", 1000);
+		await _ns("asleep", 1000);
 	}
 }
