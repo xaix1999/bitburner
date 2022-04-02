@@ -146,8 +146,8 @@ export async function main(ns) {
 	}
 	//
 	while (true) {
-		await _ns("sleep", 1000);
 		await sCp(ns);
+		await _ns("sleep", 1000);
 		await scanExes();
 		await sortServers();
 		await stuTH();
