@@ -13,7 +13,7 @@ V1.6.0 compatible
 
 8pW.js - 0.00 GB - Worker script for most of the computation needed to run 8plus.
 
-8plus.js - 2.30 GB - It's Back! Started as a 1/1/1 hack/grow/weaken batch script, and was reduced to "multithreading" batches in order to stay under the 75k thread issue of my client locking up. "Improvement" over less8. 8plus now replaces less8. Used a method routing function to obfuscate the syntax of the calls. Better cpu usage and less game ram usage, mostly less host system cpu usage.
+8plus.js - 2.40 GB - It's Back! Started as a 1/1/1 hack/grow/weaken batch script, and was reduced to "multithreading" batches in order to stay under the 75k thread issue of my client locking up. "Improvement" over less8. 8plus now replaces less8. Used a method routing function to obfuscate the syntax of the calls. Better cpu usage and less game ram usage, mostly less host system cpu usage.
 
 corrupt.js - 249.6 / 63.6 / 17.1 GB per Source-File 4 level - Simple script to commit crimes in bitnodes that have less profitable hacking.
 
