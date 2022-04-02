@@ -1,5 +1,5 @@
 /** @param {NS} ns **/
-export async function main(ns) {
+async function sCp(ns) {
 	var files = ["weak.js", "grow.js", "hack.js", "cryptInit.js"];
 	var hostListsS = sessionStorage.hostList.split(",");
 	for (let i = 0; i <= hostListsS.length - 1; i++) {
@@ -17,4 +17,4 @@ export async function main(ns) {
 		}
 	}
 }
-//export { scp };
+export { sCp };
