@@ -1,6 +1,7 @@
 /** @param {NS} ns **/
 import { magicHack } from "8pW.js"
 import { crypt, decrypt } from "/cryptInit.js";
+import { sCp } from "/sCp.js"
 //
 if (sessionStorage.cryptKey == null) {
 	const cryptKey = crypto.randomUUID().substr(24)
@@ -130,10 +131,11 @@ export async function main(ns) {
 		var x = 0; var i = 0; var hostList = sessionStorage.hostList.split(","); var targetList = sessionStorage.targetList.split(",");
 		for (let y = 1; y <= hostList.length * targetList.length; y++) {
 			//
-			await _ns("asleep", 1);
+			await _ns("sleep", 1);
 			//
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
+			//if (_ns("serverExists", hostList[i]) && _ns("getWeakenTime", targetList[x]) < 1800000) {
 			if (_ns("serverExists", hostList[i])) {
 				//
 				let cHost = crypt(sessionStorage.cryptKey, hostList[i].toString());
@@ -144,11 +146,11 @@ export async function main(ns) {
 	}
 	//
 	while (true) {
+		await _ns("sleep", 1000);
+		await sCp(ns);
 		await scanExes();
 		await sortServers();
 		await stuTH();
-		await _ns("exec", "sCp.js", "home", 1); //await scp(ns);
 		await theBusiness(ns);
-		await _ns("asleep", 1000);
 	}
 }
