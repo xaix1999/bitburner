@@ -37,8 +37,7 @@ async function magicHack(ns, cHost, cTarget) {
 	var secHa = _ns("hackAnalyze", targetList);
 	var moneyMax = _ns("getServerMaxMoney", targetList);
 	var moneyAvail = _ns("getServerMoneyAvailable", targetList) + 1;
-	var maxAvail = moneyMax / moneyAvail;
-	var groA = Math.ceil(_ns("growthAnalyze", targetList, Math.ceil(maxAvail), 1) + 1);
+	var growPerHack = Math.ceil(_ns("growthAnalyze", targetList, moneyMax / (moneyMax - (moneyMax * _ns("hackAnalyze", targetList)))));
 	var secCurrent = _ns("getServerSecurityLevel", targetList);
 	var secMin = _ns("getServerMinSecurityLevel", targetList);
 	var freeRam = (ramMax - ramUsed);
@@ -51,9 +50,7 @@ async function magicHack(ns, cHost, cTarget) {
 	var mCash = Math.trunc(moneyMax * 0.70);
 	var wRam = 1.75; var gRam = 1.75; var hRam = 1.70;
 	//
-	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20) {
-		//
-		var growPerHack = Math.ceil(_ns("growthAnalyze", targetList, moneyMax / (moneyMax - (moneyMax * _ns("hackAnalyze", targetList)))));
+	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20 && growPerHack < 6) {
 		//
 		var ghUpKeep = Math.min(growPerHack, 12)
 		var wSleep = weakTime;
