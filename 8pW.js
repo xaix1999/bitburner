@@ -37,7 +37,9 @@ async function magicHack(ns, cHost, cTarget) {
 	var secHa = _ns("hackAnalyze", targetList);
 	var moneyMax = _ns("getServerMaxMoney", targetList);
 	var moneyAvail = _ns("getServerMoneyAvailable", targetList) + 1;
+	var maxAvail = moneyMax / moneyAvail;
 	var growPerHack = Math.ceil(_ns("growthAnalyze", targetList, moneyMax / (moneyMax - (moneyMax * _ns("hackAnalyze", targetList)))));
+	var groA = Math.ceil(_ns("growthAnalyze", targetList, Math.ceil(maxAvail), 1) + 1);
 	var secCurrent = _ns("getServerSecurityLevel", targetList);
 	var secMin = _ns("getServerMinSecurityLevel", targetList);
 	var freeRam = (ramMax - ramUsed);
