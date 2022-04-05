@@ -148,7 +148,6 @@ export async function main(ns) {
 	while (true) {
 		await sCp(ns);
 		await _ns("sleep", 100);
-		//if (!_ns("scriptRunning", "syncWhil.js", "home")) { if (_ns("getServerMaxRam", "home") > 128) { await _ns("exec", "syncWhil.js", "home", 1) } }
 		await scanExes();
 		await sortServers();
 		await stuTH();
