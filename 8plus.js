@@ -15,6 +15,7 @@ export async function main(ns) {
 	var encrypted_text = crypt(sessionStorage.cryptKey, testText);
 	// decrypting
 	var decrypted_string = decrypt(sessionStorage.cryptKey, encrypted_text);
+	// test crypt
 	while (decrypted_string !== testText) { await _ns("sleep", 1000); }
 	//
 	function funcRoute(ns, method, ...args) {
@@ -135,7 +136,6 @@ export async function main(ns) {
 			//
 			if (x > targetList.length - 1) { x = 0; i++ }
 			if (i > hostList.length - 1) { i = hostList.length - 1; y = hostList.length * targetList.length + 1 }
-			//if (_ns("serverExists", hostList[i]) && _ns("getWeakenTime", targetList[x]) < 1800000) {
 			if (_ns("serverExists", hostList[i])) {
 				//
 				let cHost = crypt(sessionStorage.cryptKey, hostList[i].toString());
@@ -147,7 +147,8 @@ export async function main(ns) {
 	//
 	while (true) {
 		await sCp(ns);
-		await _ns("sleep", 1000);
+		await _ns("sleep", 100);
+		//if (!_ns("scriptRunning", "syncWhil.js", "home")) { if (_ns("getServerMaxRam", "home") > 128) { await _ns("exec", "syncWhil.js", "home", 1) } }
 		await scanExes();
 		await sortServers();
 		await stuTH();

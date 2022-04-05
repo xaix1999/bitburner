@@ -1,12 +1,17 @@
 /** @param {NS} ns **/
 export async function main(ns) {
-	ns.disableLog("ALL");
+	ns.clearLog();
+	ns.disableLog("disableLog");
+	ns.disableLog("getServerMoneyAvailable");
+	ns.disableLog("sleep");
+	//ns.disableLog("ALL");
+	//ns.tail("hnet.js");
 	//
 	async function waitForMoney(ns, targetMoney) {
 		while (ns.getServerMoneyAvailable("home") < targetMoney * 2) {
 			await ns.sleep(1000);
-			while (ns.hacknet.numHashes() >= 4) {
-				await ns.hacknet.spendHashes("Sell for Money")
+			while (ns.hacknet.numHashes() >= 10) {
+				await ns.hacknet.spendHashes("Sell for Money");
 				await ns.sleep(1);
 			}
 		}
@@ -23,6 +28,7 @@ export async function main(ns) {
 				ns.hacknet.getRamUpgradeCost(i, 5),
 				ns.hacknet.getCoreUpgradeCost(i, 5),
 				ns.hacknet.getCacheUpgradeCost(i, 5),
+				//ns.hacknet.getRamUpgradeCost(i, 2),
 			];
 			let value = Math.min.apply(Math, upgrades);
 			if (value < minValue) {
@@ -48,6 +54,8 @@ export async function main(ns) {
 			case 3:
 				ns.hacknet.upgradeCache(nodeIndex, 5);
 				break;
+			//case 0:
+			//	ns.hacknet.upgradeRam(nodeIndex, 2);
 		}
 		await ns.sleep(10);
 	}

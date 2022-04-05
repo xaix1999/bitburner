@@ -24,4 +24,4 @@ const decrypt = (salt, encoded) => {
 		.join("");
 };
 //
-export {crypt, decrypt};
+export { crypt, decrypt };

@@ -54,6 +54,16 @@ export async function main(ns) {
 		for (i = 0; i < settings.maxPlayerServers; i++) {
 			if (hostList.length < settings.maxPlayerServers) {
 				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
+					for (let z = 1; z <= 14; z++) {
+						if (targetRam < settings.maxGbRam) {
+							if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
+								targetRam *= 2;
+							}
+							if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation < ns.getPurchasedServerCost(targetRam)) {
+								targetRam = targetRam / 2;
+							}
+						}
+					}
 					if (hostList.length < ns.getPurchasedServerLimit()) {
 						let hostname = ns.purchaseServer("s-" + targetRam + "-" + crypto.randomUUID().substr(0, 6), targetRam)
 						if (hostname) {
@@ -86,7 +96,7 @@ export async function main(ns) {
 		x = 0;
 		for (i = 0; i < settings.maxPlayerServers; i++) {
 			if (hostList.length == settings.maxPlayerServers) {
-				if (hostList[i][0] == settings.maxGbRam) {
+				if (hostList[i][0] >= settings.maxGbRam) {
 					if (x == hostList.length - 1) {
 						ns.print("[" + Date().substr(16, 8) + "] All servers maxxed. Exiting.");
 						ns.exit();
