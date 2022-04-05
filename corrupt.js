@@ -29,30 +29,10 @@ export async function main(ns) {
 		if (crimeList == []) { await ns.print("Next crime will be " + crimes[0] + "."); await ns.commitCrime(crimes[0]); }
 	}
 	//
-//	async function corruptSleeves() {
-//		var sleeveNum = ns.sleeve.getNumSleeves();
-//		for (let x = 0; x <= sleeveNum - 1; x++) {
-//			//await ns.print("Sleeve #" + x + " is currently set to task " + ns.sleeve.getTask(x).task + ".");
-//			if (!ns.sleeve.getTask(x).task == "Recovery" || !ns.sleeve.getTask(x).task == "Synchro" || !ns.sleeve.getTask(x).task == "Crime") {
-//				if (ns.sleeve.getSleeveStats(x).shock > 0) {
-//					if (await ns.sleeve.setToShockRecovery(x)) { await ns.print("Sleeve #" + x + " is doing shock recovery.") }
-//				}
-//				if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync < 100) {
-//					if (await ns.sleeve.setToSynchronize(x)) { await ns.print("Sleeve #" + x + " is doing sync.") }
-//				}
-//				if (ns.sleeve.getSleeveStats(x).shock == 0 && ns.sleeve.getSleeveStats(x).sync == 100) {
-//					
-//					if (await ns.sleeve.setToCommitCrime(x, crimeList[0][1])) { await ns.print("Sleeve #" + x + " is doing crime " + crimeList[0][1] + ".") }
-//				}
-//			}
-//		}
-//	}
-	//
 	await ns.tail("corrupt.js")
 	while (true) {
 		await sortCrimes();
 		await corrupt();
-		//await corruptSleeves();
 		while (ns.isBusy()) { await ns.sleep(1000); }
 		await ns.sleep(1000);
 	}
