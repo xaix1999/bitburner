@@ -10,7 +10,7 @@ async function magicHack(ns, cHost, cTarget) {
 	var decrypted_string = decrypt(sessionStorage.cryptKey, encrypted_text);
 	// test crypt
 	while (decrypted_string !== testText) {
-		await ns.sleep(10);
+		await _ns("sleep", 10);
 		var encrypted_text = crypt(sessionStorage.cryptKey, testText);
 		var decrypted_string = decrypt(sessionStorage.cryptKey, encrypted_text);
 	}
@@ -38,7 +38,7 @@ async function magicHack(ns, cHost, cTarget) {
 	var moneyMax = _ns("getServerMaxMoney", targetList);
 	var moneyAvail = _ns("getServerMoneyAvailable", targetList) + 1;
 	var maxAvail = moneyMax / moneyAvail;
-	var growPerHack = Math.ceil(_ns("growthAnalyze", targetList, moneyMax / (moneyMax - (moneyMax * _ns("hackAnalyze", targetList)))));
+	var growPerHack = Math.ceil(_ns("growthAnalyze", targetList, moneyMax / (moneyMax - (moneyMax * secHa))));
 	var groA = Math.ceil(_ns("growthAnalyze", targetList, Math.ceil(maxAvail), 1) + 1);
 	var secCurrent = _ns("getServerSecurityLevel", targetList);
 	var secMin = _ns("getServerMinSecurityLevel", targetList);
@@ -52,7 +52,7 @@ async function magicHack(ns, cHost, cTarget) {
 	var mCash = Math.trunc(moneyMax * 0.70);
 	var wRam = 1.75; var gRam = 1.75; var hRam = 1.70;
 	//
-	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20 && growPerHack < 6) {
+	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20 && growPerHack < 13) {
 		//
 		var ghUpKeep = Math.min(growPerHack, 12);
 		var wSleep = weakTime;
@@ -64,25 +64,25 @@ async function magicHack(ns, cHost, cTarget) {
 		var hRamThreads = Math.max(Math.trunc((freeRam - wRam) / (wRam + (gRam * ghUpKeep) + hRam)), 0);
 		var hThreads = Math.min(hRamThreads, hMaxThreads);
 		//
-		if (hThreads >= 1) { _ns("exec", files[0], hostList, hThreads + 1, ddtargetList, 1, crypto.randomUUID().substr(0, 6)) && _ns("exec", files[1], hostList, (hThreads * ghUpKeep), ddtargetList, growSleep, crypto.randomUUID().substr(0, 6)) && _ns("exec", files[2], hostList, hThreads, ddtargetList, hackSleep, crypto.randomUUID().substr(0, 6)) }
+		if (hRamThreads > hMaxThreads && hThreads >= 1) { _ns("exec", files[0], hostList, hThreads + 1, ddtargetList, 1, crypto.randomUUID().substr(0, 6)) && _ns("exec", files[1], hostList, (hThreads * ghUpKeep), ddtargetList, growSleep, crypto.randomUUID().substr(0, 6)) && _ns("exec", files[2], hostList, hThreads, ddtargetList, hackSleep, crypto.randomUUID().substr(0, 6)) }
 	}
 	//
-	if (secNum > 0) {
+	if (_ns("getRunningScript", files[0], hostList, ddtargetList, 1) == null && secNum > 0 && (_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) >= wRam) {
 		//
 		var wMaxThreads = Math.ceil((secCurrent - secMin) / secWeek / (hostListsS.length - 1));
-		var wRamThreads = Math.max(Math.trunc(freeRam / wRam), 0);
+		var wRamThreads = Math.max(Math.trunc((_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) / wRam), 0);
 		var wThreads = Math.min(wRamThreads, wMaxThreads);
 		//
-		if (wThreads >= 1) { _ns("exec", files[0], hostList, wThreads, ddtargetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
+		if (wRamThreads >= 1 && wThreads >= 1) { _ns("exec", files[0], hostList, wThreads, ddtargetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
 	}
 	//
-	if (mCash / caSh > 1) {
+	if (_ns("getRunningScript", files[1], hostList, ddtargetList, 1) == null && mCash / caSh > 1 && (_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) >= gRam) {
 		//
 		var gMaxThreads = Math.ceil(groA / (hostListsS.length - 1));
-		var gRamThreads = Math.max(Math.floor(freeRam / gRam), 0);
+		var gRamThreads = Math.max(Math.floor((_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) / gRam), 0);
 		var gThreads = Math.min(gRamThreads, gMaxThreads);
 		//
-		if (gThreads >= 1) { _ns("exec", files[1], hostList, gThreads, ddtargetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
+		if (gRamThreads >= 1 && gThreads >= 1) { _ns("exec", files[1], hostList, gThreads, ddtargetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
 	}
 }
 export { magicHack };
