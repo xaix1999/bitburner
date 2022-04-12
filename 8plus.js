@@ -140,7 +140,7 @@ export async function main(ns) {
 				//
 				let cHost = crypt(sessionStorage.cryptKey, hostList[i].toString());
 				let cTarget = crypt(sessionStorage.cryptKey, targetList[x].toString());
-				await magicHack(ns, cHost, cTarget)
+				await magicHack(ns, cHost, cTarget);
 			} x++
 		}
 	}
