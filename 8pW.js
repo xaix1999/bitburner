@@ -51,6 +51,7 @@ async function magicHack(ns, cHost, cTarget) {
 	var caSh = Math.trunc(moneyAvail);
 	var mCash = Math.trunc(moneyMax * 0.70);
 	var wRam = 1.75; var gRam = 1.75; var hRam = 1.70;
+	var uuID = crypto.randomUUID().substr(0, 6)
 	//
 	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20 && growPerHack < 13) {
 		//
@@ -64,7 +65,7 @@ async function magicHack(ns, cHost, cTarget) {
 		var hRamThreads = Math.max(Math.trunc((freeRam - wRam) / (wRam + (gRam * ghUpKeep) + hRam)), 0);
 		var hThreads = Math.min(hRamThreads, hMaxThreads);
 		//
-		if (hRamThreads > hMaxThreads && hThreads >= 1) { _ns("exec", files[0], hostList, hThreads + 1, ddtargetList, 1, crypto.randomUUID().substr(0, 6)) && _ns("exec", files[1], hostList, (hThreads * ghUpKeep), ddtargetList, growSleep, crypto.randomUUID().substr(0, 6)) && _ns("exec", files[2], hostList, hThreads, ddtargetList, hackSleep, crypto.randomUUID().substr(0, 6)) }
+		if (hRamThreads > hMaxThreads && hThreads >= 1) { _ns("exec", files[0], hostList, hThreads + 1, ddtargetList, 1, uuID) && _ns("exec", files[1], hostList, (hThreads * ghUpKeep), ddtargetList, growSleep, uuID) && _ns("exec", files[2], hostList, hThreads, ddtargetList, hackSleep, uuID) }
 	}
 	//
 	if (_ns("getRunningScript", files[0], hostList, ddtargetList, 1) == null && secNum > 0 && (_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) >= wRam) {
@@ -73,7 +74,7 @@ async function magicHack(ns, cHost, cTarget) {
 		var wRamThreads = Math.max(Math.trunc((_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) / wRam), 0);
 		var wThreads = Math.min(wRamThreads, wMaxThreads);
 		//
-		if (wRamThreads >= 1 && wThreads >= 1) { _ns("exec", files[0], hostList, wThreads, ddtargetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
+		if (wRamThreads >= 1 && wThreads >= 1) { _ns("exec", files[0], hostList, wThreads, ddtargetList, 1) }
 	}
 	//
 	if (_ns("getRunningScript", files[1], hostList, ddtargetList, 1) == null && mCash / caSh > 1 && (_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) >= gRam) {
@@ -82,7 +83,7 @@ async function magicHack(ns, cHost, cTarget) {
 		var gRamThreads = Math.max(Math.floor((_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) / gRam), 0);
 		var gThreads = Math.min(gRamThreads, gMaxThreads);
 		//
-		if (gRamThreads >= 1 && gThreads >= 1) { _ns("exec", files[1], hostList, gThreads, ddtargetList, 1) } //, crypto.randomUUID().substr(0, 6)) }
+		if (gRamThreads >= 1 && gThreads >= 1) { _ns("exec", files[1], hostList, gThreads, ddtargetList, 1) }
 	}
 }
 export { magicHack };
