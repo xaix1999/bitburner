@@ -16,7 +16,11 @@ export async function main(ns) {
 	// decrypting
 	var decrypted_string = decrypt(sessionStorage.cryptKey, encrypted_text);
 	// test crypt
-	while (decrypted_string !== testText) { await _ns("sleep", 1000); }
+	while (decrypted_string !== testText) {
+		await _ns("sleep", 10);
+		var encrypted_text = crypt(sessionStorage.cryptKey, testText);
+		var decrypted_string = decrypt(sessionStorage.cryptKey, encrypted_text);
+	}
 	//
 	function funcRoute(ns, method, ...args) {
 		const call = () => eval("ns." + method)(...args);
@@ -34,6 +38,7 @@ export async function main(ns) {
 	var hostList;
 	var targetList;
 	var files = ["weak.js", "grow.js", "hack.js", "cryptInit.js"];
+	var priceList = [5e5, 15e5, 5e6, 30e6, 25e7];
 	//if (false) { brutessh(); ftpcrack(); relaysmtp(); httpworm(); sqlinject() }
 	//
 	const cStart = "import { crypt, decrypt } from '/cryptInit.js'; export async function main(ns) {const testText = 'Success!'; /* encrypting */ var encrypted_text = crypt(sessionStorage.cryptKey, testText); /* decrypting */ var decrypted_string = decrypt(sessionStorage.cryptKey, encrypted_text); while (decrypted_string !== testText) { await ns.sleep(1) } "
@@ -50,7 +55,21 @@ export async function main(ns) {
 	//
 	async function scanExes() {
 		var exes = ["BruteSSH", "FTPCrack", "relaySMTP", "HTTPWorm", "SQLInject"];
-		for (let i = 0; i <= exes.length - 1; i++) { if (!_ns("fileExists", exes[i] + ".exe", "home")) { exes.splice(i, 1); i-- } }
+		if (!_ns("fileExists", exes[0] + ".exe", "home")) {
+			if ((_ns("getServerMoneyAvailable", "home") / 2) >= 2e5) {
+				_ns("singularity.purchaseTor")
+			}
+		}
+		for (let i = 0; i <= exes.length - 1; i++) {
+			if (_ns("serverExists", "darkweb")) {
+				if (!_ns("fileExists", exes[i] + ".exe", "home")) {
+					if ((_ns("getServerMoneyAvailable", "home") / 2) >= priceList[i]) {
+						_ns("singularity.purchaseProgram", exes[i] + ".exe")
+					}
+				}
+			}
+			if (!_ns("fileExists", exes[i] + ".exe", "home")) { exes.splice(i, 1); i-- }
+		}
 		for (let i = 0; i <= hTarget.length - 1; i++) {
 			if (_ns("serverExists", hTarget[i])) {
 				if (_ns("getServerMaxMoney", hTarget[i]) > 0 || _ns("getServerMaxRam", hTarget[i]) > 2) {
@@ -69,7 +88,7 @@ export async function main(ns) {
 			let sTarget = hTarget[i];
 			if (_ns("serverExists", sTarget) && _ns("hasRootAccess", sTarget)) {
 				if (_ns("getServerMaxMoney", sTarget) > 0 || _ns("getServerMaxRam", sTarget) > 2) {
-					temp = [Math.trunc(_ns("getServerMaxMoney", sTarget) * 0.1 / _ns("getServerMinSecurityLevel", sTarget)), sTarget]
+					temp = [Math.trunc(_ns("getServerMaxMoney", sTarget) * 0.1 / _ns("getServerMinSecurityLevel", sTarget) / _ns("getWeakenTime", sTarget)), sTarget]
 					if (_ns("getServerMaxMoney", sTarget) != 0 && !targetList.includes(temp) && _ns("getServerRequiredHackingLevel", sTarget) <= _ns("getHackingLevel")) {
 						targetList.push(temp); targetList = arraySort(targetList)
 					}
@@ -92,8 +111,8 @@ export async function main(ns) {
 				}
 			}
 		}
-		if (hostList[0][0] >= 256) {
-			if (hostList[0][1].startsWith("s-") || hostList[0][1].startsWith("hacknet-node-")) {
+		if (hostList[1][0] >= 256) {
+			if (hostList[1][1].startsWith("s-") || hostList[1][1].startsWith("hacknet-node-")) {
 				for (let i = 0; i <= hostList.length - 1; i++) {
 					if (hTarget.includes(hostList[i][1])) {
 						hostList.splice(i, 1); i--
@@ -141,6 +160,7 @@ export async function main(ns) {
 				let cHost = crypt(sessionStorage.cryptKey, hostList[i].toString());
 				let cTarget = crypt(sessionStorage.cryptKey, targetList[x].toString());
 				await magicHack(ns, cHost, cTarget);
+				//
 			} x++
 		}
 	}
