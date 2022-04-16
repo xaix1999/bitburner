@@ -38,7 +38,10 @@ async function magicHack(ns, cHost, cTarget) {
 	var moneyMax = _ns("getServerMaxMoney", targetList);
 	var moneyAvail = _ns("getServerMoneyAvailable", targetList) + 1;
 	var maxAvail = moneyMax / moneyAvail;
-	var growPerHack = Math.ceil(_ns("growthAnalyze", targetList, moneyMax / (moneyMax - (moneyMax * secHa))));
+	var limitMoney = _ns("getServerMaxMoney", "foodnstuff");
+	var limitSecHA = _ns("hackAnalyze", "foodnstuff");
+	var growPerHackLimit = Math.min(Math.ceil(_ns("growthAnalyze", "foodnstuff", limitMoney / (limitMoney - (limitMoney * limitSecHA)), 1)), 12);
+	var growPerHack = Math.ceil(_ns("growthAnalyze", targetList, moneyMax / (moneyMax - (moneyMax * secHa)), 1));
 	var groA = Math.ceil(_ns("growthAnalyze", targetList, Math.ceil(maxAvail), 1) + 1);
 	var secCurrent = _ns("getServerSecurityLevel", targetList);
 	var secMin = _ns("getServerMinSecurityLevel", targetList);
@@ -51,9 +54,9 @@ async function magicHack(ns, cHost, cTarget) {
 	var caSh = Math.trunc(moneyAvail);
 	var mCash = Math.trunc(moneyMax * 0.70);
 	var wRam = 1.75; var gRam = 1.75; var hRam = 1.70;
-	var uuID = crypto.randomUUID().substr(0, 6)
+	var uuID = crypto.randomUUID().substr(0, 6);
 	//
-	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20 && growPerHack < 13) {
+	if (secNum < 1 && mCash / caSh <= 1 && freeRam >= 5.20 && growPerHack < growPerHackLimit) {
 		//
 		var ghUpKeep = Math.min(growPerHack, 12);
 		var wSleep = weakTime;
@@ -66,6 +69,7 @@ async function magicHack(ns, cHost, cTarget) {
 		var hThreads = Math.min(hRamThreads, hMaxThreads);
 		//
 		if (hRamThreads > hMaxThreads && hThreads >= 1) { _ns("exec", files[0], hostList, hThreads + 1, ddtargetList, 1, uuID) && _ns("exec", files[1], hostList, (hThreads * ghUpKeep), ddtargetList, growSleep, uuID) && _ns("exec", files[2], hostList, hThreads, ddtargetList, hackSleep, uuID) }
+		else if (ramMax < 256 && hThreads >= 1) { _ns("exec", files[0], hostList, hThreads + 1, ddtargetList, 1, uuID) && _ns("exec", files[1], hostList, (hThreads * ghUpKeep), ddtargetList, growSleep, uuID) && _ns("exec", files[2], hostList, hThreads, ddtargetList, hackSleep, uuID) }
 	}
 	//
 	if (_ns("getRunningScript", files[0], hostList, ddtargetList, 1) == null && secNum > 0 && (_ns("getServerMaxRam", hostList) - _ns("getServerUsedRam", hostList)) >= wRam) {
