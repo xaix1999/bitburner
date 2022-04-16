@@ -54,13 +54,13 @@ export async function main(ns) {
 		for (i = 0; i < settings.maxPlayerServers; i++) {
 			if (hostList.length < settings.maxPlayerServers) {
 				if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
-					for (let z = 1; z <= 14; z++) {
+					for (let z = 1; z <= 20; z++) {
 						if (targetRam < settings.maxGbRam) {
-							if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
+							if ((ns.getServerMoneyAvailable("home") / settings.maxPlayerServers) * settings.totalMoneyAllocation >= ns.getPurchasedServerCost(targetRam)) {
 								targetRam *= 2;
 							}
-							if (ns.getServerMoneyAvailable("home") * settings.totalMoneyAllocation < ns.getPurchasedServerCost(targetRam)) {
-								targetRam = targetRam / 2;
+							if ((ns.getServerMoneyAvailable("home") / settings.maxPlayerServers) * settings.totalMoneyAllocation < ns.getPurchasedServerCost(targetRam)) {
+								targetRam = Math.max(targetRam / 2, settings.minGbRam);
 							}
 						}
 					}
