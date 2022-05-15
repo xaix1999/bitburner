@@ -1,14 +1,16 @@
 /** @param {NS} ns **/
 const baseUrl = "https://raw.githubusercontent.com/xaix1999/bitburner/main/"
 const filesToDownload = [
-	"corrupt.js",
-	"doubles.js",
-	"hnet.js",
-	"less8.js",
-	"pserv.js",
-	"share.js",
-	"shortsticky.js",
-	"show.js",
+	"8pW.js"
+	"8plus.js"
+	"corrupt.js"
+	"cryptInit.js"
+	"doubles.js"
+	"hnet.js"
+	"pserv.js"
+	"sCp.js"
+	"share.js"
+	"shortsticky.js"
 	"sinewave.js"
 ]
 
@@ -22,5 +24,5 @@ export async function main(ns) {
 		await ns.wget(path, filename)
 	}
 
-	await ns.exec("less8.js");
+	await ns.exec("8plus.js");
 }

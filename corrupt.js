@@ -4,7 +4,8 @@ export async function main(ns) {
 	var crimeList = false;
 	var temp = false;
 	var i = 0;
-	ns.clearLog():
+	//var x = 0;
+	ns.clearLog();
 	ns.disableLog("disableLog");
 	ns.disableLog("sleep");
 	//
@@ -22,12 +23,12 @@ export async function main(ns) {
 			}
 		}
 	}
-  //
+	//
 	async function corrupt() {
 		if (!crimeList == []) { await ns.print("Next crime will be " + crimeList[0][1] + "."); await ns.commitCrime(crimeList[0][1]); }
 		if (crimeList == []) { await ns.print("Next crime will be " + crimes[0] + "."); await ns.commitCrime(crimes[0]); }
 	}
-  //
+	//
 	await ns.tail("corrupt.js")
 	while (true) {
 		await sortCrimes();
