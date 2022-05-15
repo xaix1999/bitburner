@@ -1,7 +1,4 @@
 # Bitburner
-//
-![Screenshot at 2022-03-01 13-40-37](https://user-images.githubusercontent.com/88251983/156245544-2ca6e396-9d39-469b-bdeb-a79c2726fb3b.png)
-//
 **scripts used to automate hacking on all hosts
 
 These are some scripts I use to auto exec hacks to auto gen cash in this game.
