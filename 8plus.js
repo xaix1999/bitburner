@@ -1,5 +1,5 @@
 /** @param {NS} ns **/
-import { magicHack } from "8pW.js"
+import { magicHack } from "/8pW.js"
 import { crypt, decrypt } from "/cryptInit.js";
 import { sCp } from "/sCp.js"
 //
